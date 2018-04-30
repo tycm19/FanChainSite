@@ -1,0 +1,76 @@
+
+header{
+    height: 100%;
+    width: 130px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: black;
+    overflow-x: hidden;
+    padding-top: 20px;
+    border: outset;
+    border-color:dimgray;
+}
+
+header li {
+    margin-left: -36px;
+    list-style: none;
+    padding: 15px; 
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-left: 40px;
+    border-top: groove;
+    border-color: gold;
+    border-width: 2px;
+}
+
+header li a{
+    color:white;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+header li a:hover {
+    color: indianred;
+    text-decoration: none;
+}
+
+.home{
+    background-image: url('./images/home.png');
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-position-x: 2px;
+    background-size: 35px;    
+}
+
+.play {
+    background-image: url('./images/play.png');
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-position-x: 2px;
+    background-size: 33px;
+}
+
+.about {
+    background-image: url('./images/about.png');
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-position-x: 7px;
+    background-size: 23px;
+    border-bottom: groove;
+    border-color: gold;
+    border-width: 2px;
+}
+
+main {
+    margin-left: 130px; 
+    padding-left: 200px;
+    padding-right: 200px;
+    padding-top: 30px;
+    padding-bottom:30px;
+    background-color: rgba(233, 218, 129, 0.1)
+}
+
+h1 {
+    margin-left: 45%;
+}
