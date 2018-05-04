@@ -11,12 +11,11 @@ import Main from './Components/Main'
 
 //npm install react, jquery, bootstrap-react, react-router
 
-class App extends Component {
+class App extends Component {    
    
     render() {
         return (
             <div className="App">
-                <h1> FanChain</h1>  
                 <Header/>
                 <Main/>             
             </div>

@@ -11,7 +11,8 @@ class AddressInput extends Component {
             <div className="AddressInput">
                 <form onSubmit={this.handleSubmit.bind(this)}> 
                     <div>
-                        Enter Address <input type="text" ref="title" />
+                        Username: <input type="text" ref="username" />
+                        Password:  <input type="password" ref="pass" />
                     </div>
                     <div>
                         <input type="submit" value="Submit" />

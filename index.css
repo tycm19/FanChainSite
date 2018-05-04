@@ -1,31 +1,34 @@
 
-header{
-    height: 100%;
-    width: 130px;
+header {
+    top:0;
+    height: 50px;
+    width: 100%;
     position: fixed;
     z-index: 1;
     top: 0;
     left: 0;
     background-color: black;
-    overflow-x: hidden;
-    padding-top: 20px;
-    border: outset;
-    border-color:dimgray;
+    overflow: hidden;
+    text-align:center; 
 }
 
 header li {
-    margin-left: -36px;
-    list-style: none;
-    padding: 15px; 
+    margin-top: 0px;
+    margin-bottom: 0px;
     padding-top: 12px;
     padding-bottom: 12px;
-    padding-left: 40px;
-    border-top: groove;
+    list-style: none;
+    text-align: center; 
+    padding-right: 15px;
+    padding-left: 50px;
+    border-left: groove;
     border-color: gold;
-    border-width: 2px;
+    border-width: 1px;
+    display: inline-block;
 }
 
 header li a{
+    display: block;
     color:white;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
@@ -39,38 +42,36 @@ header li a:hover {
     background-image: url('./images/home.png');
     background-repeat: no-repeat;
     background-position: left center;
-    background-position-x: 2px;
-    background-size: 35px;    
+    background-position-x: 10px;
+    background-size: 30px;    
 }
 
 .play {
     background-image: url('./images/play.png');
     background-repeat: no-repeat;
     background-position: left center;
-    background-position-x: 2px;
-    background-size: 33px;
+    background-position-x: 16px;
+    background-size: 30px;
+    padding-right: 20px;
+    padding-left: 60px;
 }
 
 .about {
     background-image: url('./images/about.png');
     background-repeat: no-repeat;
     background-position: left center;
-    background-position-x: 7px;
-    background-size: 23px;
-    border-bottom: groove;
+    background-position-x: 14px;
+    background-size: 25px;
+    border-right: groove;
     border-color: gold;
-    border-width: 2px;
+    border-width: 1px;
 }
 
 main {
-    margin-left: 130px; 
+    margin-top: 50px;
     padding-left: 200px;
     padding-right: 200px;
     padding-top: 30px;
     padding-bottom:30px;
     background-color: rgba(233, 218, 129, 0.1)
-}
-
-h1 {
-    margin-left: 45%;
 }
