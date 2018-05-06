@@ -14,7 +14,7 @@ class AvailablePlayers extends Component {
                     })    
                     if (playerAdded !== true) {
                         this.props.salaryCallback("add", this.props.salary);
-                        this.props.updatePlayersCallback(this.props.pos, id, this.props.name, this.props.salary);
+                        this.props.updatePlayersCallback(this.props.pos, id, this.props.name, this.props.salary, this.props.profile);
                     } else {
                         console.log("player already added");
                     }
@@ -27,7 +27,7 @@ class AvailablePlayers extends Component {
                     })
                     if (playerAdded !== true) {
                         this.props.salaryCallback("add", this.props.salary);
-                        this.props.updatePlayersCallback(this.props.pos, id, this.props.name, this.props.salary);
+                        this.props.updatePlayersCallback(this.props.pos, id, this.props.name, this.props.salary, this.props.profile);
                     } else {
                         console.log("player already added");
                     }

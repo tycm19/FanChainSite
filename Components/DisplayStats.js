@@ -7,6 +7,9 @@ import $ from 'jquery';
 import AvailablePlayers from './AvailablePlayers';
 import salariesData from './data/salaries.json';
 import players from './data/allPlayers.json';
+import rink from './images/rinkImage.png';
+import './play.css';
+import placeholder from './images/placeholder.png';
 
 //Program Fles\PostgreSQL\10\bin> psql -U postgres
 //TODO: Store salaries.json into DB 
@@ -69,7 +72,8 @@ class DisplayStats extends Component {
             // {
             //   ID : [name, position, score projection, salary]
             // }
-            playersList: []
+            playersList: [], // chosen players
+            rinkPlayers: { leftG: [0, placeholder], leftD: [0, placeholder], leftL: [0, placeholder], leftR: [0, placeholder], leftC: [0, placeholder], rightG: [0, placeholder], rightD: [0, placeholder], rightL: [0, placeholder], rightR: [0, placeholder], rightC: [0, placeholder] }
         }        
     }
 
@@ -86,7 +90,7 @@ class DisplayStats extends Component {
     //check if players are already in list
     //check if positions are valid
 
-    updatePlayers = (position, playerLink, name, salary) => {
+    updatePlayers = (position, playerLink, name, salary, profile) => {
         var newArray = [];
         var removed = false;
         this.state.availablePositions.forEach(function (pos) {
@@ -97,6 +101,49 @@ class DisplayStats extends Component {
             }
         })
         this.setState({ availablePositions: newArray })
+
+        var currentPics = this.state.rinkPlayers;
+        if (position === "G") {
+            if (currentPics.leftG[0] === 0) {
+                currentPics.leftG[0] = playerLink;
+                currentPics.leftG[1] = profile.src;
+            } else {
+                currentPics.rightG[0] = playerLink;
+                currentPics.rightG[1] = profile.src;
+            }
+        } else if (position === "D") {
+            if (currentPics.leftD[0] === 0) {
+                currentPics.leftD[0] = playerLink;
+                currentPics.leftD[1] = profile.src;
+            } else {
+                currentPics.rightD[0] = playerLink;
+                currentPics.rightD[1] = profile.src;
+            }
+        } else if (position === "L") {
+            if (currentPics.leftL[0] === 0) {
+                currentPics.leftL[0] = playerLink;
+                currentPics.leftL[1] = profile.src;
+            } else {
+                currentPics.rightL[0] = playerLink;
+                currentPics.rightL[1] = profile.src;
+            }
+        } else if (position === "R") {
+            if (currentPics.leftR[0] === 0) {
+                currentPics.leftR[0] = playerLink;
+                currentPics.leftR[1] = profile.src;
+            } else {
+                currentPics.rightR[0] = playerLink;
+                currentPics.rightR[1] = profile.src;
+            }
+        } else if (position === "C") {
+            if (currentPics.leftC[0] === 0) {
+                currentPics.leftC[0] = playerLink;
+                currentPics.leftC[1] = profile.src;
+            } else {
+                currentPics.rightC[0] = playerLink;
+                currentPics.rightC[1] = profile.src;
+            }
+        }
 
         var playerURL = 'https://statsapi.web.nhl.com' + playerLink + '/stats?stats=gameLog';
         $.ajax({
@@ -157,14 +204,14 @@ class DisplayStats extends Component {
         })
     }
 
-    removePlayers = (id, pos) => {
+    removePlayers = (id, position) => {
         var newArray = [];
         var newPosAvailableArray = this.state.availablePositions;
-        newPosAvailableArray.push(pos);
+        newPosAvailableArray.push(position);
 
         this.setState({ availablePositions: newPosAvailableArray })
 
-        if (pos === 'G') {
+        if (position === 'G') {
             this.state.goaliesChosen.forEach(function (row) {
                 if (row.key !== id) {
                     newArray.push(row);
@@ -178,6 +225,49 @@ class DisplayStats extends Component {
                 }
             })
             this.setState({ skatersChosen: newArray })
+        }
+
+        var currentPics = this.state.rinkPlayers;
+        if (position === "G") {
+            if (currentPics.leftG[0] === id) {
+                currentPics.leftG[0] = 0;
+                currentPics.leftG[1] = placeholder;
+            } else {
+                currentPics.rightG[0] = 0;
+                currentPics.rightG[1] = placeholder;
+            }
+        } else if (position === "D") {
+            if (currentPics.leftD[0] === id) {
+                currentPics.leftD[0] = 0;
+                currentPics.leftD[1] = placeholder;
+            } else {
+                currentPics.rightD[0] = 0;
+                currentPics.rightD[1] = placeholder;
+            }
+        } else if (position === "L") {
+            if (currentPics.leftL[0] === id) {
+                currentPics.leftL[0] = 0;
+                currentPics.leftL[1] = placeholder;
+            } else {
+                currentPics.rightL[0] = 0;
+                currentPics.rightL[1] = placeholder;
+            }
+        } else if (position === "R") {
+            if (currentPics.leftR[0] === id) {
+                currentPics.leftR[0] = 0;
+                currentPics.leftR[1] = placeholder;
+            } else {
+                currentPics.rightR[0] = 0;
+                currentPics.rightR[1] = placeholder;
+            }
+        } else if (position === "C") {
+            if (currentPics.leftC[0] === id) {
+                currentPics.leftC[0] = 0;
+                currentPics.leftC[1] = placeholder;
+            } else {
+                currentPics.rightC[0] = 0;
+                currentPics.rightC[1] = placeholder;
+            }
         }
     }
 
@@ -227,9 +317,10 @@ class DisplayStats extends Component {
                     return response.json();
                 })
                 .then(function (myJSON) {
-                    var salariesArray = myJSON['data'];
-                    var allIDs = Object.keys(this.state.salaries)
-                    allIDs.forEach(function (playerlink) {
+                    var salariesArray = myJSON['data'];                  
+                    //var allIDs = Object.keys(this.state.salaries)
+                    salariesArray.forEach(function (playerobject) {
+                        var playerlink = "/api/v1/people/" + playerobject['id']
                         //Get player link, position, name for all teams
                         //var playerlink = player['person']['link'];
                         //var position = player['position']['code'];
@@ -253,11 +344,13 @@ class DisplayStats extends Component {
                                         var position;
                                         var scoreProject;
                                         var salary;
+                                        var profilePic = new Image();
                                         salariesArray.forEach(function (salaryobject) {
                                             if (salaryobject['id'] + "" === playerlink.substring(15)) {
                                                 name = salaryobject['firstname'] + " " + salaryobject['lastname'];
                                                 position = salaryobject['position'];                                                
                                                 scoreProject = salaryobject['projectedscore'];
+                                                profilePic.src = 'data:image/png;base64,' + salaryobject['image'];
                                                 if (scoreProject === 0) {
                                                     scoreProject = 'N/A'
                                                 }
@@ -267,27 +360,27 @@ class DisplayStats extends Component {
 
                                         if (position === "C" && this.mounted) {
                                             var centers = this.state.centers
-                                            centers.push({ 'playerName': name, 'salary': salary, link: playerlink, score: scoreProject, position: position });
+                                            centers.push({ 'playerName': name, 'salary': salary, link: playerlink, score: scoreProject, position: position, profile: profilePic });
                                             this.setState({ centers: centers }, function () {
                                             })
                                         } else if (position === "L" && this.mounted) {
                                             var lefts = this.state.leftwings
-                                            lefts.push({ 'playerName': name, 'salary': salary, link: playerlink, score: scoreProject, position: position });
+                                            lefts.push({ 'playerName': name, 'salary': salary, link: playerlink, score: scoreProject, position: position, profile: profilePic });
                                             this.setState({ leftwings: lefts }, function () {
                                             })
                                         } else if (position === "R" && this.mounted) {
                                             var rights = this.state.rightwings
-                                            rights.push({ 'playerName': name, 'salary': salary, link: playerlink, score: scoreProject, position: position });
+                                            rights.push({ 'playerName': name, 'salary': salary, link: playerlink, score: scoreProject, position: position, profile: profilePic });
                                             this.setState({ rightwings: rights }, function () {
                                             })
                                         } else if (position === "D" && this.mounted) {
                                             var def = this.state.defensemen
-                                            def.push({ 'playerName': name, 'salary': salary, link: playerlink, score: scoreProject, position: position });
+                                            def.push({ 'playerName': name, 'salary': salary, link: playerlink, score: scoreProject, position: position, profile: profilePic });
                                             this.setState({ defensemen: def }, function () {
                                             })
                                         } else if (this.mounted) {
                                             var goalies = this.state.goalies
-                                            goalies.push({ 'playerName': name, 'salary': salary, link: playerlink, score: scoreProject, position: position });
+                                            goalies.push({ 'playerName': name, 'salary': salary, link: playerlink, score: scoreProject, position: position, profile: profilePic });
                                             this.setState({ goalies: goalies }, function () {
                                             })
 
@@ -438,6 +531,7 @@ class DisplayStats extends Component {
                     scoreproj={player.score}
                     salary={player.salary}
                     id={player.link}
+                    profile= {player.profile}
                     salaryCallback={this.updateSalary}
                     updatePlayersCallback={this.updatePlayers}
                     availableSalary={this.state.salary}
@@ -462,7 +556,24 @@ class DisplayStats extends Component {
 
         return (
             <div className="DisplayStats">
-                Salary Remaining: {this.state.salary}
+
+                <div className= "imagesDisplay">
+                    <img className="rinkImage" src={rink} />
+                    <img className="leftG" src={this.state.rinkPlayers.leftG[1]} />
+                    <img className="leftD" src={this.state.rinkPlayers.leftD[1]} />
+                    <img className="leftL" src={this.state.rinkPlayers.leftL[1]} />
+                    <img className="leftC" src={this.state.rinkPlayers.leftC[1]} />
+                    <img className="leftR" src={this.state.rinkPlayers.leftR[1]} />
+                    <img className="rightL" src={this.state.rinkPlayers.rightL[1]} />
+                    <img className="rightC" src={this.state.rinkPlayers.rightC[1]} />
+                    <img className="rightR" src={this.state.rinkPlayers.rightR[1]} />
+                    <img className="rightD" src={this.state.rinkPlayers.rightD[1]} />
+                    <img className="rightG" src={this.state.rinkPlayers.rightG[1]} />
+                </div>
+
+                <div>
+                    Salary Remaining: {this.state.salary}
+                </div>
 
                 <Table striped bordered condensed hover>
                     <thead>

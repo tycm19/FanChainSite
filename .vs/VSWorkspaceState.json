@@ -2,9 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\Components",
-    "\\Components\\data",
+    "\\Components\\images",
     "\\images"
   ],
-  "SelectedNode": "\\Components\\data\\salaries.json",
+  "SelectedNode": "\\Components\\DisplayStats.js",
   "PreviewInSolutionExplorer": false
 }

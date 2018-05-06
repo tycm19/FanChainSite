@@ -1,0 +1,181 @@
+.imagesDisplay {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 350px;
+    width: 700px;
+}
+
+.rinkImage {
+    position:absolute;
+    height: 350px;
+    width: 700px;
+    opacity: 0.95;
+    border-radius: 20%;
+}
+
+.leftG {
+    height: 70px;
+    width: 70px;
+    border-radius: 25%;
+    border: solid;
+    border-color: ThreeDDarkShadow;
+    border-width: 1.5px;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+    position: relative;
+    top: 140px;
+    bottom: 0;
+    left: 45px;
+    right: 0;
+    opacity: 0.9;
+}
+
+.leftD {
+    height: 70px;
+    width: 70px;
+    border-radius: 25%;
+    border: solid;
+    border-color: ThreeDDarkShadow;
+    border-width: 1.5px;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+    position: relative;
+    top: 50px;
+    bottom: 0;
+    left: 45px;
+    right: 0;
+    opacity: 0.9;
+}
+
+
+.leftL {
+    height: 70px;
+    width: 70px;
+    border-radius: 25%;
+    border: solid;
+    border-color: ThreeDDarkShadow;
+    border-width: 1.5px;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+    position: relative;
+    top: 60px;
+    bottom: 0;
+    left: 70px;
+    right: 0;
+    opacity: 0.9;
+}
+
+
+.leftC {
+    height: 70px;
+    width: 70px;
+    border-radius: 25%;
+    border: solid;
+    border-color: ThreeDDarkShadow;
+    border-width: 1.5px;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+    position: relative;
+    top: 140px;
+    bottom: 0;
+    left: 65px;
+    right: 0;
+    opacity: 0.9;
+}
+
+
+.leftR {
+    height: 70px;
+    width: 70px;
+    border-radius: 25%;
+    border: solid;
+    border-color: ThreeDDarkShadow;
+    border-width: 1.5px;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+    position: relative;
+    top: 225px;
+    bottom: 0;
+    left: -70px;
+    right: 0;
+    opacity: 0.9;
+}
+
+
+.rightL {
+    height: 70px;
+    width: 70px;
+    border-radius: 25%;
+    border: solid;
+    border-color: ThreeDDarkShadow;
+    border-width: 1.5px;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+    position: relative;
+    top: 225px;
+    bottom: 0;
+    left: 70px;
+    right: 0;
+    opacity: 0.9;
+}
+
+
+.rightC {
+    height: 70px;
+    width: 70px;
+    border-radius: 25%;
+    border: solid;
+    border-color: ThreeDDarkShadow;
+    border-width: 1.5px;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+    position: relative;
+    top: 140px;
+    bottom: 0;
+    left: -65px;
+    right: 0;
+    opacity: 0.9;
+}
+
+
+.rightR {
+    height: 70px;
+    width: 70px;
+    border-radius: 25%;
+    border: solid;
+    border-color: ThreeDDarkShadow;
+    border-width: 1.5px;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+    position: relative;
+    top: 60px;
+    bottom: 0;
+    left: -70px;
+    right: 0;
+    opacity: 0.9;
+}
+
+.rightD {
+    height: 70px;
+    width: 70px;
+    border-radius: 25%;
+    border: solid;
+    border-color: ThreeDDarkShadow;
+    border-width: 1.5px;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+    position: relative;
+    top: 50px;
+    bottom: 0;
+    left: -45px;
+    right: 0;
+    opacity: 0.9;
+}
+
+.rightG {
+    height: 70px;
+    width: 70px;
+    border-radius: 25%;
+    border: solid;
+    border-color: ThreeDDarkShadow;
+    border-width: 1.5px;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+    position: relative;
+    top: 140px;
+    bottom: 0;
+    left: -45px;
+    right: 0;
+    opacity: 0.9;
+}

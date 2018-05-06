@@ -33,7 +33,8 @@ const pool = new pg.Pool(config);
 // List of database queries
 const DBQ = {
     setPlayers: "INSERT INTO playersdata(id, firstname, lastname, position, projectedscore, salary, image) VALUES($1, $2, $3, $4, $5, $6, $7);",
-    getPlayers: "SELECT * FROM playersdata;"
+    getPlayers: "SELECT * FROM playersdata;",
+    getPlayer: "SELECT * FROM players WHERE id = $1;"
 }
 
 // This is the key database calling function.
@@ -82,7 +83,7 @@ app.get('/get_players', function (req, res) {
     function callback(err, data) {
         if (err) {
             res.status(400);
-            res.send("Failed query - get_players");
+            res.send("Failed query - get_players:" + err);
         } else {
            // console.log(data)
             let responseData = [];
@@ -94,7 +95,7 @@ app.get('/get_players', function (req, res) {
                     "position": datum.position,
                     "projectedscore": datum.projectedscore,
                     "salary": datum.salary,
-                    "image": datum.image
+                    "image": datum.image.toString("base64")
                 })
             })
 
@@ -105,4 +106,37 @@ app.get('/get_players', function (req, res) {
 
     // Perform the query
     performDatabaseAction(DBQ.getPlayers, [], callback);
+});
+
+// Request a single player
+app.get('/get_player', function (req, res) {
+    let playerId = req.query["playerId"];
+
+    // This is what is run after the query is complete
+    function callback(err, data) {
+        if (err) {
+            res.status(400);
+            res.send("Failed query - get_player: " + err);
+        } else {
+            let response = {};
+            if (data.rows.length > 0) {
+                // console.log(data.rows[0])
+                response = {
+                    "id": data.rows[0].id,
+                    "firstname": data.rows[0].firstname,
+                    "lastname": data.rows[0].lastname,
+                    "position": data.rows[0].position,
+                    "projectedscore": data.rows[0].projectedscore,
+                    "salary": data.rows[0].salary,
+                    "image": data.rows[0].image.toString("base64")
+                }
+            }
+
+            res.status(200);
+            res.json(response);
+        }
+    }
+
+    // Perform the query
+    performDatabaseAction(DBQ.getPlayer, [playerId], callback);
 });
