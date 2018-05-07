@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './play.css';
 
 class StatSkater extends Component {
 
@@ -24,7 +25,7 @@ class StatSkater extends Component {
                 <td className="BLK">{this.props.blk} </td>
                 <td className="Salary">{this.props.salary} </td>
                 <td className="FantasyPoints">{points} </td>
-                <td className="Remove"> <button onClick={(e) => this.handleButtonClick(this.props.id)}>Remove</button></td>
+                <td > <button className="remove" onClick={(e) => this.handleButtonClick(this.props.id)}>Remove </button></td>
             </tr>
         );
     }

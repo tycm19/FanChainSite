@@ -1,6 +1,45 @@
 import React, { Component } from 'react';
+import './play.css';
+import Modal from 'react-modal';
+
+const customStyles = {
+    content: {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)'
+    }
+};
+
 
 class AvailablePlayers extends Component {
+
+    constructor() {
+        super();
+        this.state = {
+            modalIsOpen: false,
+            tooltip: "success"
+        }
+
+        this.openModal = this.openModal.bind(this);
+        this.afterOpenModal = this.afterOpenModal.bind(this);
+        this.closeModal = this.closeModal.bind(this);
+    }
+
+    openModal() {
+        this.setState({ modalIsOpen: true });
+    }
+
+    afterOpenModal() {
+        this.text.style.color = '#000000';
+    }
+
+    closeModal() {
+        this.setState({ modalIsOpen: false });
+    }
+
     handleButtonClick(id) {
         if (this.props.availableSalary > this.props.salary) {        
             var playerAdded = false;
@@ -11,12 +50,13 @@ class AvailablePlayers extends Component {
                         if (row.key === id) {
                             playerAdded = true;
                         }
-                    })    
+                    })
                     if (playerAdded !== true) {
                         this.props.salaryCallback("add", this.props.salary);
                         this.props.updatePlayersCallback(this.props.pos, id, this.props.name, this.props.salary, this.props.profile);
+                        this.setState({ tooltip: "Success!" })
                     } else {
-                        console.log("player already added");
+                        this.setState({ tooltip: "Player already added" })
                     }
                 }
                 else {
@@ -28,15 +68,21 @@ class AvailablePlayers extends Component {
                     if (playerAdded !== true) {
                         this.props.salaryCallback("add", this.props.salary);
                         this.props.updatePlayersCallback(this.props.pos, id, this.props.name, this.props.salary, this.props.profile);
+                        this.setState({ tooltip: "Success!" })
                     } else {
-                        console.log("player already added");
+                        this.setState({ tooltip: "Player already added" })
                     }
                 }
-            }                        
+            } else {
+                this.setState({ tooltip: "Position not available" })
+            }                   
         } else {
             //TODO: popup windows/notifs- less intrusive if possible
-            console.log("not enough salary")
+            this.setState({ tooltip: "Not enough salary" })
         }
+
+        this.openModal()
+
     }
 
     render() {
@@ -47,7 +93,24 @@ class AvailablePlayers extends Component {
                 <td className="position">{this.props.pos} </td>
                 <td className="scoreProjection">{this.props.scoreproj} </td>
                 <td className="salary">{this.props.salary} </td>
-                <td className="addPlayer"> <button onClick={(e) => this.handleButtonClick(this.props.id)}>Add</button></td>
+                <td >
+                    
+
+                    <div>
+                        <button className="addPlayer" onClick={(e) => this.handleButtonClick(this.props.id)}>Add</button>
+                        <Modal
+                            isOpen={this.state.modalIsOpen}
+                            onAfterOpen={this.afterOpenModal}
+                            onRequestClose={this.closeModal}
+                            style={customStyles}
+                            contentLabel="notificationModal"
+                            className = "modalStyles">
+
+                            <div ref={text => this.text = text} className = "modaltext" >{this.state.tooltip}</div>
+                            <button className = "modalButton" onClick={this.closeModal}>Close</button>
+                        </Modal>
+                    </div>
+                </td>
             </tr>
         );
     }

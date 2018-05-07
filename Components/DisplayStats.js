@@ -558,17 +558,17 @@ class DisplayStats extends Component {
             <div className="DisplayStats">
 
                 <div className= "imagesDisplay">
-                    <img className="rinkImage" src={rink} />
-                    <img className="leftG" src={this.state.rinkPlayers.leftG[1]} />
-                    <img className="leftD" src={this.state.rinkPlayers.leftD[1]} />
-                    <img className="leftL" src={this.state.rinkPlayers.leftL[1]} />
-                    <img className="leftC" src={this.state.rinkPlayers.leftC[1]} />
-                    <img className="leftR" src={this.state.rinkPlayers.leftR[1]} />
-                    <img className="rightL" src={this.state.rinkPlayers.rightL[1]} />
-                    <img className="rightC" src={this.state.rinkPlayers.rightC[1]} />
-                    <img className="rightR" src={this.state.rinkPlayers.rightR[1]} />
-                    <img className="rightD" src={this.state.rinkPlayers.rightD[1]} />
-                    <img className="rightG" src={this.state.rinkPlayers.rightG[1]} />
+                    <img className="rinkImage" src={rink} alt={placeholder}/>
+                    <img className="leftG" src={this.state.rinkPlayers.leftG[1]} alt={placeholder} />
+                    <img className="leftD" src={this.state.rinkPlayers.leftD[1]} alt={placeholder}/>
+                    <img className="leftL" src={this.state.rinkPlayers.leftL[1]} alt={placeholder}/>
+                    <img className="leftC" src={this.state.rinkPlayers.leftC[1]} alt={placeholder}/>
+                    <img className="leftR" src={this.state.rinkPlayers.leftR[1]} alt={placeholder}/>
+                    <img className="rightL" src={this.state.rinkPlayers.rightL[1]} alt={placeholder}/>
+                    <img className="rightC" src={this.state.rinkPlayers.rightC[1]} alt={placeholder}/>
+                    <img className="rightR" src={this.state.rinkPlayers.rightR[1]} alt={placeholder}/>
+                    <img className="rightD" src={this.state.rinkPlayers.rightD[1]} alt={placeholder}/>
+                    <img className="rightG" src={this.state.rinkPlayers.rightG[1]} alt={placeholder}/>
                 </div>
 
                 <div>

@@ -10,6 +10,7 @@ header {
     background-color: black;
     overflow: hidden;
     text-align:center; 
+    opacity: 0.92;
 }
 
 header li {
@@ -44,6 +45,7 @@ header li a:hover {
     background-position: left center;
     background-position-x: 10px;
     background-size: 30px;    
+    opacity: 0.85;
 }
 
 .play {
@@ -54,6 +56,7 @@ header li a:hover {
     background-size: 30px;
     padding-right: 20px;
     padding-left: 60px;
+    opacity: 0.85;
 }
 
 .about {
@@ -65,13 +68,15 @@ header li a:hover {
     border-right: groove;
     border-color: gold;
     border-width: 1px;
+    opacity: 0.85;
 }
 
 main {
     margin-top: 50px;
-    padding-left: 200px;
-    padding-right: 200px;
+    padding-left: 230px;
+    padding-right: 230px;
     padding-top: 30px;
     padding-bottom:30px;
-    background-color: rgba(233, 218, 129, 0.1)
+    background-color: rgba(233, 218, 129, 0.1);
+    opacity: 0.9;
 }
