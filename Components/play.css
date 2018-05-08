@@ -259,7 +259,7 @@
     border-width: 1px;
     border-color: goldenrod;
     height: 70px;
-    width: 180px;
+    width: 200px;
     padding: 5px;
     background: #faf7da; /* Old browsers */
     background: -moz-linear-gradient(top, #faf7da 4%, #dbcf83 52%, #eeefb8 99%); /* FF3.6-15 */
@@ -270,7 +270,7 @@
 }
 
 .modalButton {
-    margin-left: 55px;
+    margin-left: 65px;
     -moz-box-shadow: inset 0px 1px 3px 0px #91b8b3;
     -webkit-box-shadow: inset 0px 1px 3px 0px #91b8b3;
     box-shadow: inset 0px 1px 3px 0px #91b8b3;

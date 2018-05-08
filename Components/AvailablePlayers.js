@@ -74,11 +74,11 @@ class AvailablePlayers extends Component {
                     }
                 }
             } else {
-                this.setState({ tooltip: "Position not available" })
+                this.setState({ tooltip: "Position: " + this.props.pos+ " not available" })
             }                   
         } else {
             //TODO: popup windows/notifs- less intrusive if possible
-            this.setState({ tooltip: "Not enough salary" })
+            this.setState({ tooltip: "Not enough salary: " + this.props.availableSalary })
         }
 
         this.openModal()
