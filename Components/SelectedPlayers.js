@@ -11,7 +11,7 @@ class SelectedPlayers extends Component {
     render() {
 
         return (
-            <tr className="SelectedPlayer">
+            <tr className="tbackground">
                 <td className="name">{this.props.name} </td>
                 <td className="position">{this.props.pos} </td>
                 <td className="scoreProjection">{this.props.scoreproj} </td>

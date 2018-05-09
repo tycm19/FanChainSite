@@ -10,7 +10,7 @@ header {
     background-color: black;
     overflow: hidden;
     text-align: center;
-    opacity: 0.9;
+    opacity: 1;
 }
 
 header li {
@@ -59,7 +59,7 @@ header li a:hover {
     opacity: 0.95;
 }
 
-.about {
+.competition {
     background-image: url('./images/about.png');
     background-repeat: no-repeat;
     background-position: left center;
@@ -71,12 +71,26 @@ header li a:hover {
     opacity: 0.95;
 }
 
-main {
+Main {
     margin-top: 50px;
     padding-left: 260px;
     padding-right: 260px;
     padding-top: 30px;
     padding-bottom:30px;
     background-color: rgba(233, 218, 129, 0.1);
-    opacity: 0.9;
+    opacity: 1;
+    height: 100%;
+}
+
+.bgimg {
+    background-image: url('./images/backgroundrink.png');
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.15;
+    z-index: -1;
 }

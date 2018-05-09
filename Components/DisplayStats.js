@@ -12,34 +12,11 @@ import './play.css';
 import placeholder from './images/placeholder.png';
 import SelectedPlayers from './SelectedPlayers';
 
-//Program Fles\PostgreSQL\10\bin> psql -U postgres
-//TODO: Store salaries.json into DB 
-//TODO: Store/Get pictures from DB - overlay on rink image
-//TODO: notifs if team positions full/no salary
-
-//TODO: login page/schema -My Team Page 
-//TODO: save team data/pull from db 
-
 //1: Get all players by team id https://statsapi.web.nhl.com/api/v1/teams/15/roster (store their links)
 //2.1: Grab their gameLog https://statsapi.web.nhl.com/{playerlink}/stats?stats=gameLog&season=20172018 and check if they play that day (2018-04-07). if they do play, store info in array
 //2.2: Note that this is because we cannot check the players' "next" games since the season is over. Implementation for getting players available next day will be slightly different (checking teams' next game dates)
 //3: Get their 2016-2017 stats by using https://statsapi.web.nhl.com/{playerlink}/stats?stats=statsSingleSeason&season=20162017. calculate salary based on fantasy points total/games played
 //4: Display all players by category (code: G,D,L,R,C, newplayer)
-
-//Step 1: Tables display available player selection. Displays players playing that day by category and can be sorted by salary, stat efficiency, fantasy points (salary is based on fantasy points/game last season)
-//Step 2: Add button for each row that allows for slection of player. -> creates team at top table. (js event that adds row -> re-render subcomponent (move table to subcomponent) add row, subtract salary)
-//Step 3: Top table updates real-time with stats
-
-//Step 4: Interface for creating a contract
-//Step 5: Save data for players - personal account
-
-//players: {name, salary, link, score, position}
-
-//Salaries: store on-file
-
-//MetaMask: check if metamask installed/supported browser
-//Set defaulta account. Pass in contract ABI and contract address
-//Call directly from contract variable.
 
 class DisplayStats extends Component {
 
@@ -78,19 +55,6 @@ class DisplayStats extends Component {
             rinkPlayers: { leftG: [0, placeholder], leftD: [0, placeholder], leftL: [0, placeholder], leftR: [0, placeholder], leftC: [0, placeholder], rightG: [0, placeholder], rightD: [0, placeholder], rightL: [0, placeholder], rightR: [0, placeholder], rightC: [0, placeholder] }
         }        
     }
-
-    //Callback function, available salary, salary callback, passed in to AvailablePlayers
-    //When button is clicked, check if valid add based on salary. If not, notify not enough salary.
-    //if valid add, call the callback with player info,callback salary change, remove the button/row
-
-    //when updating skaterschosen/goalieschosen with removals, also pass in salary to update 
-
-    //update the players stats realtime via timer?
-
-    //Remove callback -> add row/button back
-    //Add callback -> render the rows
-    //check if players are already in list
-    //check if positions are valid
 
     updatePlayers = (position, playerLink, name, salary, profile,scoreprojection) => {      
         this.state.playersChosen.push(
@@ -162,128 +126,7 @@ class DisplayStats extends Component {
             }
         }
 
-        //var playerURL = 'https://statsapi.web.nhl.com' + playerLink + '/stats?stats=gameLog';
-
-        //if (position === 'G') {
-            //console.log(stats)
-        //    this.state.goaliesChosen.push(
-        //        <StatGoalie
-        //            key={playerLink}
-        //            name={name}
-        //            sav={0}
-        //            ga={0}
-        //            so={0}
-        //            salary={salary}
-        //            id={playerLink}
-        //            pos={position}
-        //            salaryCallback={this.updateSalary}
-        //            removePlayersCallback={this.removePlayers}
-        //            removePicturesCallback={this.removePicture}
-        //        />);
-        //    var goalies = this.state.goaliesChosen;
-        //    this.setState({ goaliesChosen: goalies })
-
-        //}
-        //else {
-            //this.state.skatersChosen.push(
-                //<StatSkater
-                    //key={playerLink}
-                    //name={name}
-                    //assist={0}
-                    //evg={0}
-                    //ppg={0}
-                    //shg={0}
-                    //sog={0}
-                    //hits={0}
-                    //blk={0}
-                    ////salary={salary}
-                    //id={playerLink}
-                    //pos={position}
-                    //salaryCallback={this.updateSalary}
-                    //removePlayersCallback={this.removePlayers}
-                    //removePicturesCallback={this.removePicture}
-                ///>);
-            //var skaters = this.state.skatersChosen;
-            //this.setState({ skatersChosen: skaters })
-        //}
-
-        //$.ajax({
-            //url: playerURL,
-            //dataType: 'json',
-            //cache: false,
-            //success: function (stats) {
-                //var playerRemoved = true;
-                    //if (position === 'G') {
-                        //this.state.goaliesChosen.forEach(function (row) {
-                            //if (row.key === playerLink) {
-                                //playerRemoved = false;
-                            //}
-                        //})
-                    //}
-                    //else {
-                        //this.state.skatersChosen.forEach(function (row) {
-                            //if (row.key === playerLink) {
-                                //playerRemoved = false;
-                            //}
-                        //})
-                    //}
-
-                //if (playerRemoved === false) {
-                    //this.removePlayers(playerLink, position,false)
-                    //var statLine = stats['stats'][0]['splits'][0]['stat'];
-                    //console.log(position) check positions valid                  
-                    //if (position === 'G') {
-                        //console.log(stats)
-                        //this.state.goaliesChosen.push(
-                            //<StatGoalie
-                                //key={playerLink}
-                                //name={name}
-                                //sav={statLine['saves']}
-                                //ga={statLine['goalsAgainst']}
-                                //so={statLine['shutouts']}
-                                //salary={salary}
-                                //id={playerLink}
-                                //pos={position}
-                                //salaryCallback={this.updateSalary}
-                                //removePlayersCallback={this.removePlayers}
-                                //removePicturesCallback={this.removePicture}
-                            ///>);
-                        //var goalies = this.state.goaliesChosen;
-                        //this.setState({ goaliesChosen: goalies })
-
-                    //}
-                    //else {
-                        // console.log('added');
-//                        var goals = statLine['goals'];
-                        //var ppgs = statLine['powerPlayGoals'];
-                        //var shgs = statLine['shortHandedGoals'];
-                        //this.state.skatersChosen.push(
-                            //<StatSkater
-                                //key={playerLink}
-                                //name={name}
-                                //assist={parseInt(statLine['assists'], 10)}
-                                //evg={goals - ppgs - shgs}
-                                //ppg={ppgs}
-                                //shg={shgs}
-                                //sog={parseInt(statLine['shots'], 10)}
-                                //hits={parseInt(statLine['hits'], 10)}
-                                //blk={parseInt(statLine['blocked'], 10)}
-                                //salary={salary}
-                                //id={playerLink}
-                                //pos={position}
-                                //salaryCallback={this.updateSalary}
-                                //removePlayersCallback={this.removePlayers}
-                                //removePicturesCallback={this.removePicture}
-                            ///>);
-                        //var skaters = this.state.skatersChosen;
-                        //this.setState({ skatersChosen: skaters })
-                    //}
-                //}
-            //}.bind(this),
-            //error: function (xhr, status, error) {
-                //console.log(error);
-            //}
-        //})
+        
     }
 
     removePlayers = (id, position, addPosition) => {
@@ -296,22 +139,6 @@ class DisplayStats extends Component {
 
             this.setState({ availablePositions: newPosAvailableArray })
         }
-
-        //if (position === 'G') {
-            //this.state.goaliesChosen.forEach(function (row) {
-                //if (row.key !== id) {
-                    //newArray.push(row);
-                //}
-            ////})
-            //this.setState({ goaliesChosen: newArray })
-        //} else {
-            //this.state.skatersChosen.forEach(function (row) {
-                //if (row.key !== id) {
-                    //newArray.push(row)
-                //}
-            //})
-            //this.setState({ skatersChosen: newArray })
-        //}
 
         var newPlayers = [];
 
@@ -372,41 +199,14 @@ class DisplayStats extends Component {
 
     updateSalary = (operation, salary) => {
         if (operation === "add") {
-            //console.log(this)
-            //console.log(salary, operation)
             this.setState({ salary: this.state.salary - salary });
         }
         else {
-            //console.log(this)
             this.setState({ salary: this.state.salary + salary });
         }
     }
 
-    getNHLStats(gameURL) {
-        $.ajax({
-            url: gameURL,
-            dataType: 'json',
-            cache: false,
-            success: function (data) {
-                this.setState({ stats: $.extend({}, this.state.stats, data['liveData']['boxscore']['teams']['away']['players']) }, function () {
-                })
-            }.bind(this),
-            error: function (xhr, status, error) {
-                console.log(error);
-            }
-        })
-    }
-
     componentWillMount() {
-        //console.log(this.state.salaries)
-        //var teamIDs = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 28, 29, 30, 52, 53, 54];                    
-        //teamIDs.forEach(function (teamID) {
-        //var rosterURL = 'https://statsapi.web.nhl.com/api/v1/teams/' + teamID + '/roster';            
-        //$.ajax({
-        //  url: rosterURL,
-        //  dataType: 'json',
-        // cache: false,
-        // success: function (data) {
         this.mounted = true;
 
         if (this.mounted === true) {
@@ -417,19 +217,12 @@ class DisplayStats extends Component {
                 })
                 .then(function (myJSON) {
                     var salariesArray = myJSON['data'];                  
-                    //var allIDs = Object.keys(this.state.salaries)
+
                     salariesArray.forEach(function (playerobject) {
                         var playerlink = "/api/v1/people/" + playerobject['id']
-                        //Get player link, position, name for all teams
-                        //var playerlink = player['person']['link'];
-                        //var position = player['position']['code'];
-                        var playerlogURL = 'https://statsapi.web.nhl.com' + playerlink + '/stats?stats=gameLog&season=20172018'
-                        //var playerName = player['person']['fullName'];
-                        //var listp = this.state.playersList;
-                        //listp.push({name:playerlink})
-                        //this.setState({ playersList: listp })
 
-                        // console.log(this.state.playersList)
+                        var playerlogURL = 'https://statsapi.web.nhl.com' + playerlink + '/stats?stats=gameLog&season=20172018'
+ 
 
                         $.ajax({
                             url: playerlogURL,
@@ -483,98 +276,7 @@ class DisplayStats extends Component {
                                             this.setState({ goalies: goalies }, function () {
                                             })
 
-                                        }
-                                        //  var gameStats = logData['stats'][0]['splits'][0]['stat'];                                        
-                                        //var season16url = 'https://statsapi.web.nhl.com' + playerlink + '/stats?stats=statsSingleSeason&season=20162017';                                       
-
-                                        //$.ajax({
-                                        //    url: season16url,
-                                        //    dataType: 'json',
-                                        //    cache: false,
-                                        //    success: function (data16) {
-                                        //        //For each player, check their season 16 stats to calculate salary
-                                        //        if (data16['stats'][0]['splits'].length !== 0) {
-                                        //            var stats16 = data16['stats'][0]['splits'][0]['stat'];   
-                                        //            var fantasyScore16;
-                                        //            var salary;
-                                        //            var evg;
-                                        //            //Total salary 9,000
-                                        //            //Minimum salary 400
-                                        //            if (position === "C") {                                                        
-                                        //                evg = stats16['goals'] - stats16['powerPlayGoals'] - stats16['shortHandedGoals'];
-                                        //                fantasyScore16 = ((stats16['assists'] * 5 + evg * 7 + stats16['powerPlayGoals'] * 8 + stats16['shortHandedGoals'] * 10 + stats16['shots'] + stats16['hits'] + stats16['blocked']) / stats16['games']).toFixed(2);
-                                        //                salary = Math.max(400, Math.round(100 * fantasyScore16));  
-                                        //                var centers = this.state.centers
-                                        //                centers.push({ 'playerName': playerName, 'salary': salary, link : playerlink, score: fantasyScore16, position: position});
-                                        //                this.setState({ centers: centers}, function () {
-                                        //                })
-                                        //            } else if (position === "L") {
-                                        //                evg = stats16['goals'] - stats16['powerPlayGoals'] - stats16['shortHandedGoals'];
-                                        //                fantasyScore16 = ((stats16['assists'] * 5 + evg * 7 + stats16['powerPlayGoals'] * 8 + stats16['shortHandedGoals'] * 10 + stats16['shots'] + stats16['hits'] + stats16['blocked']) / stats16['games']).toFixed(2);
-                                        //                salary = Math.max(400, Math.round(100 * fantasyScore16));
-                                        //                var lefts = this.state.leftwings
-                                        //                lefts.push({ 'playerName': playerName, 'salary': salary, link: playerlink, score: fantasyScore16, position: position });
-                                        //                this.setState({ leftwings: lefts }, function () {
-                                        //                })
-                                        //            } else if (position === "R") {
-                                        //                evg = stats16['goals'] - stats16['powerPlayGoals'] - stats16['shortHandedGoals'];
-                                        //                fantasyScore16 = ((stats16['assists'] * 5 + evg * 7 + stats16['powerPlayGoals'] * 8 + stats16['shortHandedGoals'] * 10 + stats16['shots'] + stats16['hits'] + stats16['blocked']) / stats16['games']).toFixed(2);
-                                        //                salary = Math.max(400, Math.round(100 * fantasyScore16));
-                                        //                var rights = this.state.rightwings
-                                        //                rights.push({ 'playerName': playerName, 'salary': salary, link: playerlink, score: fantasyScore16, position: position });
-                                        //                this.setState({ rightwings: rights }, function () {
-                                        //                })
-                                        //            } else if (position === "D") {
-                                        //                evg = stats16['goals'] - stats16['powerPlayGoals'] - stats16['shortHandedGoals'];
-                                        //                fantasyScore16 = ((stats16['assists'] * 5 + evg * 7 + stats16['powerPlayGoals'] * 8 + stats16['shortHandedGoals'] * 10 + stats16['shots'] + stats16['hits'] + stats16['blocked']) / stats16['games']).toFixed(2);
-                                        //                salary = Math.max(400, Math.round(100 * fantasyScore16));
-                                        //                var def = this.state.defensemen
-                                        //                def.push({ 'playerName': playerName, 'salary': salary, link: playerlink, score: fantasyScore16, position: position });
-                                        //                this.setState({ defensemen: def }, function () {
-                                        //                })
-                                        //            } else {                                                      
-                                        //                fantasyScore16 = ((stats16['saves'] - stats16['goalsAgainst'] * 5 + stats16['shutouts'] * 10) / stats16['games']).toFixed(2)
-                                        //                salary = Math.max(400, Math.round(100 * fantasyScore16));
-                                        //                var goalies = this.state.goalies
-                                        //                goalies.push({ 'playerName': playerName, 'salary': salary, link: playerlink, score: fantasyScore16, position: position });
-                                        //                this.setState({ goalies: goalies }, function () {
-                                        //                })
-                                        //            } 
-                                        //        }
-                                        //        else {
-                                        //            //new player salary                                                
-                                        //            if (position === "C") {
-                                        //                centers = this.state.centers
-                                        //                centers.push({ 'playerName': playerName, 'salary': 600, link: playerlink, score: 'N/A', position: position });
-                                        //                this.setState({ centers: centers }, function () {
-                                        //                })
-                                        //            } else if (position === "L") {
-                                        //                lefts = this.state.leftwings
-                                        //                lefts.push({ 'playerName': playerName, 'salary': 600, link: playerlink, score: 'N/A', position: position });
-                                        //                this.setState({ leftwings: lefts }, function () {
-                                        //                })
-                                        //            } else if (position === "R") {
-                                        //                rights = this.state.rightwings
-                                        //                rights.push({ 'playerName': playerName, 'salary': 600, link: playerlink, score: 'N/A', position: position });
-                                        //                this.setState({ rightwings: rights }, function () {
-                                        //                })
-                                        //            } else if (position === "D") {
-                                        //                def = this.state.defensemen
-                                        //                def.push({ 'playerName': playerName, 'salary': 600, link: playerlink, score: 'N/A', position: position });
-                                        //                this.setState({ defensemen: def }, function () {
-                                        //                })
-                                        //            } else {
-                                        //                goalies = this.state.goalies
-                                        //                goalies.push({ 'playerName': playerName, 'salary': 600, link: playerlink, score: 'N/A', position: position });
-                                        //                this.setState({ goalies: goalies }, function () {
-                                        //                })
-                                        //            }
-                                        //        }
-                                        //    }.bind(this),
-                                        //    error: function (xhr, status, error) {
-                                        //        console.log(error);
-                                        //    }
-                                        //})                                                                                 
+                                        }                                                                                                               
                                     }
 
                                 }
@@ -584,35 +286,9 @@ class DisplayStats extends Component {
                             }
                         })
                     }.bind(this))
-        //  }.bind(this),
-        //error: function (xhr, status, error) {
-        //    console.log(error);
-        // }
-        // })        
-        //}.bind(this))
                 }.bind(this))
             this.setState({ newSalaries: salariesArray })                        
-        }        
-
-        //if (this.mounted === true) {
-            //var salariesPost = this.state.salaries;
-            //var url = '/set_players';
-            //var data = [{ id: 7, firstname: "A", lastname: "B", position: 'C', projectedScore: 'D', salary: 1, image: "text" }];
-            //var datas = JSON.stringify(data)
-            //fetch(url, {
-                //headers: { 'content-type': "application/json" },
-                //method: 'POST', // or 'PUT'
-                //body: datas, // data can be `string` or {object}!                
-            //}).then(res => res.json())
-                //.catch(error => console.error('Error:', error))
-                //.then(response => console.log('Success:', response));
-        //}
-
-        
-    }
-
-    componentDidMount() {
-        //this.getNHLStats();
+        }                
     }
 
     componentWillUnmount() {
@@ -620,8 +296,7 @@ class DisplayStats extends Component {
     }
 
     processPlayers(playersList, allPlayers) {
-        playersList.forEach(function (player) {
-            //console.log("push")
+        playersList.forEach(function (player) { 
             allPlayers.push(
                 <AvailablePlayers
                     key={player.link}
@@ -644,8 +319,6 @@ class DisplayStats extends Component {
     }
 
     render() {
-
-
         var allPlayers = [];
         this.processPlayers(this.state.centers, allPlayers);
         this.processPlayers(this.state.rightwings, allPlayers);
@@ -657,11 +330,7 @@ class DisplayStats extends Component {
         return (
             <div className="DisplayStats">
 
-                <div className="imagesDisplay">
-                    <div>
-                        Salary Remaining: {this.state.salary}
-                    </div>
-
+                <div className="imagesDisplay">                    
                     <img className="rinkImage" src={rink} alt={placeholder}/>
                     <img className="leftG" src={this.state.rinkPlayers.leftG[1]} alt={placeholder} />
                     <img className="leftD" src={this.state.rinkPlayers.leftD[1]} alt={placeholder}/>
@@ -675,50 +344,19 @@ class DisplayStats extends Component {
                     <img className="rightG" src={this.state.rinkPlayers.rightG[1]} alt={placeholder}/>
                 </div>
 
-                <div className = "AddPlayers">
+                <div className="AddPlayers">
+
+                <div className = "headerControls">
+                        <h3> Player Selection </h3>
+                        <div className="salaryControls">
+                            Salary Remaining: {this.state.salary}
+                        </div>
+                </div> 
                 
-                <Table striped bordered condensed hover>
-                    <thead>
-                        <tr>
-                            <th>Player</th>
-                            <th>Position</th>
-                            <th>AST</th>
-                            <th>EVG</th>
-                            <th>PPG</th>
-                            <th>SHG</th>
-                            <th>SOG</th>
-                            <th>HITS</th>
-                            <th>BLKS</th>
-                            <th>Salary</th>
-                            <th>Fantasy Points</th>
-                            <th>Remove</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.state.skatersChosen}
-                    </tbody>
-                </Table>
-
-                <Table striped bordered condensed hover>
-                    <thead>
-                        <tr>
-                            <th>Player</th>
-                            <th>Position</th>
-                            <th>Saves</th>
-                            <th>Shots Allowed</th>
-                            <th>Shutout</th>
-                            <th>Salary</th>
-                            <th>Fantasy Points</th>
-                            <th>Remove</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.state.goaliesChosen}
-                    </tbody>
-                </Table>
-
-                <Table striped bordered condensed hover>
-                    <thead>
+                <div className = "tables">                                                
+                    
+                        <Table striped bordered condensed hover className="tbackground">
+                            <thead className="thead">
                         <tr>
                             <th>Name</th>
                             <th>Position</th>
@@ -733,7 +371,7 @@ class DisplayStats extends Component {
                 </Table>
 
                 <Table striped bordered condensed hover>
-                    <thead>
+                            <thead className="thead">
                         <tr>
                             <th>Name</th>
                             <th>Position</th>
@@ -745,7 +383,8 @@ class DisplayStats extends Component {
                     <tbody>
                         {allPlayers}
                     </tbody>
-                </Table>
+                        </Table>
+                </div>
 
                 </div>
             </div>
@@ -754,49 +393,3 @@ class DisplayStats extends Component {
 }
 
 export default DisplayStats;
-
-//var statsListSkaters = [];
-//var statsListGoalies = [];
-//let stats;
-////console.log(this.state);
-//if (this.state.stats.length !== 0) {
-//    stats = this.state.stats;
-//    for (var key in stats) {
-//        if (Object.keys(stats[key]['stats']).length !== 0) {
-//            if (Object.keys(stats[key]['stats'])[0] === "skaterStats") {
-//                var goals = parseInt(stats[key]['stats']['skaterStats']['goals'], 10);
-//                var ppgs = parseInt(stats[key]['stats']['skaterStats']['powerPlayGoals'], 10);
-//                var shgs = parseInt(stats[key]['stats']['skaterStats']['shortHandedGoals'], 10);
-
-//                statsListSkaters.push(
-//                    <StatSkater
-//                        name={stats[key]['person']['fullName']}
-//                        assist={parseInt(stats[key]['stats']['skaterStats']['assists'], 10)}
-//                        evg={goals - ppgs - shgs}
-//                        ppg={ppgs}
-//                        shg={shgs}
-//                        sog={parseInt(stats[key]['stats']['skaterStats']['shots'], 10)}
-//                        hits={parseInt(stats[key]['stats']['skaterStats']['hits'], 10)}
-//                        blk={parseInt(stats[key]['stats']['skaterStats']['blocked'], 10)}
-//                    />
-//                )
-//            } else {
-//                var shots = parseInt(stats[key]['stats']['goalieStats']['shots'], 10);
-//                var saves = parseInt(stats[key]['stats']['goalieStats']['saves'], 10);
-//                var shutout = 0;
-//                if (parseInt(stats[key]['stats']['goalieStats']['savePercentage'], 10) === 100) {
-//                    shutout = 1;
-//                }
-//                statsListGoalies.push(
-//                    <StatGoalie
-//                        name={stats[key]['person']['fullName']}
-//                        sav={saves}
-//                        ga={shots - saves}
-//                        so={shutout}
-//                    />
-//                )
-//            }
-//        }
-
-//    }
-//}

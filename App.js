@@ -8,6 +8,7 @@ import React, { Component } from 'react';
 import Header from './Components/Header';
 //import DisplayStats from './Components/DisplayStats';
 import Main from './Components/Main'
+import './index.css';
 
 //npm install react, jquery, bootstrap-react, react-router
 
@@ -16,6 +17,7 @@ class App extends Component {
     render() {
         return (
             <div className="App">
+                <div className = "bgimg"></div>
                 <Header/>
                 <Main/>             
             </div>

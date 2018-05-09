@@ -1,4 +1,4 @@
-.imagesDisplay {
+.imagesDisplay {   
     height: 100%;
     width: 35%;
     z-index: 1;
@@ -6,9 +6,8 @@
     background-color: rgba(233, 218, 129, 0.1);
     padding-top: 5px;
     position:fixed;
-    left:0;
-    top: 50px;
-    text-align:center;
+    right:0;
+    top: 38px;
     margin-top:5px;
 }
 
@@ -17,19 +16,63 @@
     width: 65%;
     position: fixed;
     z-index: 1;
-    overflow-x: scroll;
-    right: 0;
-    top: 50px;
+    left: 0;
+    top: 38px;
     padding-bottom: 30px;
-    padding-right: 40px;
+    padding-right: 50px;
     background-color: rgba(233, 218, 129, 0.1);
+}
+
+.headerControls {
+    margin-left: 85px;
+    margin-top: 25px;
+    margin-bottom: -15px;
+}
+
+.salaryControls {
+    position: absolute;
+    right: 0;
+    margin-top: -30px;
+    font-weight: bold;
+}
+
+.tables {
+    padding-bottom: 40px;
+    padding-right: 80px;
+    padding-left: 80px;
+    padding-top: 30px;
+    overflow-y: scroll;
+    position: fixed;
+    height: 90%;
+    width: 65%;
+    margin: 5px;
+    margin-top: 20px;
+    border-top: ridge;
+    border-right: ridge;
+    border-left: ridge;
+    border-bottom: ridge;
+    border-width: 2px;
+    border-radius: 10px 10px 10px 10px;
+}
+
+.tbackground {
+    background-color: rgba(248, 232, 176, 0.20);
+    border-style: ridge;
+    border-color:  darkgray;
+}
+
+.thead {
+    padding: 10px;
+    background-color: rgba(248, 232, 176, 0.20);
+    border-style: ridge;
+    border-color: darkgray;    
 }
 
 .rinkImage {
     position: absolute;
     height: 610px;
     width: 330px;
-    opacity: 0.9;
+    opacity: 0.8;
     border-radius: 20%;
     top: 50%;
     left:50%;
