@@ -1,6 +1,6 @@
 
 header {
-    top:0;
+    top: 0;
     height: 50px;
     width: 100%;
     position: fixed;
@@ -9,7 +9,7 @@ header {
     left: 0;
     background-color: black;
     overflow: hidden;
-    text-align:center; 
+    text-align: center;
     opacity: 0.9;
 }
 
@@ -73,8 +73,8 @@ header li a:hover {
 
 main {
     margin-top: 50px;
-    padding-left: 230px;
-    padding-right: 230px;
+    padding-left: 260px;
+    padding-right: 260px;
     padding-top: 30px;
     padding-bottom:30px;
     background-color: rgba(233, 218, 129, 0.1);

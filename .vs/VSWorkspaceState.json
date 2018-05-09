@@ -2,9 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\Components",
+    "\\Components\\data",
     "\\Components\\images",
     "\\images"
   ],
-  "SelectedNode": "\\index.css",
+  "SelectedNode": "\\Components\\SelectedPlayers.js",
   "PreviewInSolutionExplorer": false
 }

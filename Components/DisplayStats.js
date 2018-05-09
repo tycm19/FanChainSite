@@ -10,6 +10,7 @@ import players from './data/allPlayers.json';
 import rink from './images/rinkImage.png';
 import './play.css';
 import placeholder from './images/placeholder.png';
+import SelectedPlayers from './SelectedPlayers';
 
 //Program Fles\PostgreSQL\10\bin> psql -U postgres
 //TODO: Store salaries.json into DB 
@@ -54,6 +55,7 @@ class DisplayStats extends Component {
             availablePositions: ['C', 'C', 'D', 'D', 'L', 'L', 'R', 'R', 'G', 'G'],
             skatersChosen: [],
             goaliesChosen: [],
+            playersChosen: [],
 
             centers: [],
             defensemen: [],
@@ -90,7 +92,22 @@ class DisplayStats extends Component {
     //check if players are already in list
     //check if positions are valid
 
-    updatePlayers = (position, playerLink, name, salary, profile) => {
+    updatePlayers = (position, playerLink, name, salary, profile,scoreprojection) => {      
+        this.state.playersChosen.push(
+            <SelectedPlayers
+                key={playerLink}
+                name={name}
+                salary={salary}
+                pos={position}
+                id={playerLink}
+                scoreproj={scoreprojection}
+                salaryCallback={this.updateSalary}                
+                removePlayersCallback={this.removePlayers}
+                removePicturesCallback={this.removePicture}
+            />);
+        var playersChosen = this.state.playersChosen;
+        this.setState({ playersChosen: playersChosen })
+
         var newArray = [];
         var removed = false;
         this.state.availablePositions.forEach(function (pos) {
@@ -145,88 +162,170 @@ class DisplayStats extends Component {
             }
         }
 
-        var playerURL = 'https://statsapi.web.nhl.com' + playerLink + '/stats?stats=gameLog';
-        $.ajax({
-            url: playerURL,
-            dataType: 'json',
-            cache: false,
-            success: function (stats) {
-                var statLine = stats['stats'][0]['splits'][0]['stat'];
-                //console.log(position) check positions valid                  
-                if (position === 'G') {
-                    //console.log(stats)
-                    this.state.goaliesChosen.push(
-                        <StatGoalie
-                            key={playerLink}
-                            name={name}
-                            sav={statLine['saves']}
-                            ga={statLine['goalsAgainst']}
-                            so={statLine['shutouts']}
-                            salary={salary}
-                            id={playerLink}
-                            pos={position}
-                            salaryCallback={this.updateSalary}
-                            removePlayersCallback={this.removePlayers}
-                        />);
-                    var goalies = this.state.goaliesChosen;
-                    this.setState({ goaliesChosen: goalies })
+        //var playerURL = 'https://statsapi.web.nhl.com' + playerLink + '/stats?stats=gameLog';
 
-                }
-                else {
-                    // console.log('added');
-                    var goals = statLine['goals'];
-                    var ppgs = statLine['powerPlayGoals'];
-                    var shgs = statLine['shortHandedGoals'];
-                    this.state.skatersChosen.push(
-                        <StatSkater
-                            key={playerLink}
-                            name={name}
-                            assist={parseInt(statLine['assists'], 10)}
-                            evg={goals - ppgs - shgs}
-                            ppg={ppgs}
-                            shg={shgs}
-                            sog={parseInt(statLine['shots'], 10)}
-                            hits={parseInt(statLine['hits'], 10)}
-                            blk={parseInt(statLine['blocked'], 10)}
-                            salary={salary}
-                            id={playerLink}
-                            pos={position}
-                            salaryCallback={this.updateSalary}
-                            removePlayersCallback={this.removePlayers}
-                        />);
-                    var skaters = this.state.skatersChosen;
-                    this.setState({ skatersChosen: skaters })
-                }
-            }.bind(this),
-            error: function (xhr, status, error) {
-                console.log(error);
-            }
-        })
+        //if (position === 'G') {
+            //console.log(stats)
+        //    this.state.goaliesChosen.push(
+        //        <StatGoalie
+        //            key={playerLink}
+        //            name={name}
+        //            sav={0}
+        //            ga={0}
+        //            so={0}
+        //            salary={salary}
+        //            id={playerLink}
+        //            pos={position}
+        //            salaryCallback={this.updateSalary}
+        //            removePlayersCallback={this.removePlayers}
+        //            removePicturesCallback={this.removePicture}
+        //        />);
+        //    var goalies = this.state.goaliesChosen;
+        //    this.setState({ goaliesChosen: goalies })
+
+        //}
+        //else {
+            //this.state.skatersChosen.push(
+                //<StatSkater
+                    //key={playerLink}
+                    //name={name}
+                    //assist={0}
+                    //evg={0}
+                    //ppg={0}
+                    //shg={0}
+                    //sog={0}
+                    //hits={0}
+                    //blk={0}
+                    ////salary={salary}
+                    //id={playerLink}
+                    //pos={position}
+                    //salaryCallback={this.updateSalary}
+                    //removePlayersCallback={this.removePlayers}
+                    //removePicturesCallback={this.removePicture}
+                ///>);
+            //var skaters = this.state.skatersChosen;
+            //this.setState({ skatersChosen: skaters })
+        //}
+
+        //$.ajax({
+            //url: playerURL,
+            //dataType: 'json',
+            //cache: false,
+            //success: function (stats) {
+                //var playerRemoved = true;
+                    //if (position === 'G') {
+                        //this.state.goaliesChosen.forEach(function (row) {
+                            //if (row.key === playerLink) {
+                                //playerRemoved = false;
+                            //}
+                        //})
+                    //}
+                    //else {
+                        //this.state.skatersChosen.forEach(function (row) {
+                            //if (row.key === playerLink) {
+                                //playerRemoved = false;
+                            //}
+                        //})
+                    //}
+
+                //if (playerRemoved === false) {
+                    //this.removePlayers(playerLink, position,false)
+                    //var statLine = stats['stats'][0]['splits'][0]['stat'];
+                    //console.log(position) check positions valid                  
+                    //if (position === 'G') {
+                        //console.log(stats)
+                        //this.state.goaliesChosen.push(
+                            //<StatGoalie
+                                //key={playerLink}
+                                //name={name}
+                                //sav={statLine['saves']}
+                                //ga={statLine['goalsAgainst']}
+                                //so={statLine['shutouts']}
+                                //salary={salary}
+                                //id={playerLink}
+                                //pos={position}
+                                //salaryCallback={this.updateSalary}
+                                //removePlayersCallback={this.removePlayers}
+                                //removePicturesCallback={this.removePicture}
+                            ///>);
+                        //var goalies = this.state.goaliesChosen;
+                        //this.setState({ goaliesChosen: goalies })
+
+                    //}
+                    //else {
+                        // console.log('added');
+//                        var goals = statLine['goals'];
+                        //var ppgs = statLine['powerPlayGoals'];
+                        //var shgs = statLine['shortHandedGoals'];
+                        //this.state.skatersChosen.push(
+                            //<StatSkater
+                                //key={playerLink}
+                                //name={name}
+                                //assist={parseInt(statLine['assists'], 10)}
+                                //evg={goals - ppgs - shgs}
+                                //ppg={ppgs}
+                                //shg={shgs}
+                                //sog={parseInt(statLine['shots'], 10)}
+                                //hits={parseInt(statLine['hits'], 10)}
+                                //blk={parseInt(statLine['blocked'], 10)}
+                                //salary={salary}
+                                //id={playerLink}
+                                //pos={position}
+                                //salaryCallback={this.updateSalary}
+                                //removePlayersCallback={this.removePlayers}
+                                //removePicturesCallback={this.removePicture}
+                            ///>);
+                        //var skaters = this.state.skatersChosen;
+                        //this.setState({ skatersChosen: skaters })
+                    //}
+                //}
+            //}.bind(this),
+            //error: function (xhr, status, error) {
+                //console.log(error);
+            //}
+        //})
     }
 
-    removePlayers = (id, position) => {
+    removePlayers = (id, position, addPosition) => {
+        
         var newArray = [];
-        var newPosAvailableArray = this.state.availablePositions;
-        newPosAvailableArray.push(position);
 
-        this.setState({ availablePositions: newPosAvailableArray })
+        if (addPosition === true) {
+            var newPosAvailableArray = this.state.availablePositions;
+            newPosAvailableArray.push(position);
 
-        if (position === 'G') {
-            this.state.goaliesChosen.forEach(function (row) {
-                if (row.key !== id) {
-                    newArray.push(row);
-                }
-            })
-            this.setState({ goaliesChosen: newArray })
-        } else {
-            this.state.skatersChosen.forEach(function (row) {
-                if (row.key !== id) {
-                    newArray.push(row)
-                }
-            })
-            this.setState({ skatersChosen: newArray })
+            this.setState({ availablePositions: newPosAvailableArray })
         }
 
+        //if (position === 'G') {
+            //this.state.goaliesChosen.forEach(function (row) {
+                //if (row.key !== id) {
+                    //newArray.push(row);
+                //}
+            ////})
+            //this.setState({ goaliesChosen: newArray })
+        //} else {
+            //this.state.skatersChosen.forEach(function (row) {
+                //if (row.key !== id) {
+                    //newArray.push(row)
+                //}
+            //})
+            //this.setState({ skatersChosen: newArray })
+        //}
+
+        var newPlayers = [];
+
+        this.state.playersChosen.forEach(function (row) {
+            if (row.key !== id) {
+                
+                newPlayers.push(row)
+            }
+
+        })
+        this.setState({ playersChosen: newPlayers })
+    }
+
+    removePicture = (id, position) => {
         var currentPics = this.state.rinkPlayers;
         if (position === "G") {
             if (currentPics.leftG[0] === id) {
@@ -531,13 +630,14 @@ class DisplayStats extends Component {
                     scoreproj={player.score}
                     salary={player.salary}
                     id={player.link}
-                    profile= {player.profile}
+                    profile={player.profile}
                     salaryCallback={this.updateSalary}
                     updatePlayersCallback={this.updatePlayers}
                     availableSalary={this.state.salary}
                     availablePositions={this.state.availablePositions}
                     skatersChosen={this.state.skatersChosen}
                     goaliesChosen={this.state.goaliesChosen}
+                    playersChosen={this.state.playersChosen}
                 />
             )
         }.bind(this))
@@ -557,7 +657,11 @@ class DisplayStats extends Component {
         return (
             <div className="DisplayStats">
 
-                <div className= "imagesDisplay">
+                <div className="imagesDisplay">
+                    <div>
+                        Salary Remaining: {this.state.salary}
+                    </div>
+
                     <img className="rinkImage" src={rink} alt={placeholder}/>
                     <img className="leftG" src={this.state.rinkPlayers.leftG[1]} alt={placeholder} />
                     <img className="leftD" src={this.state.rinkPlayers.leftD[1]} alt={placeholder}/>
@@ -571,10 +675,8 @@ class DisplayStats extends Component {
                     <img className="rightG" src={this.state.rinkPlayers.rightG[1]} alt={placeholder}/>
                 </div>
 
-                <div>
-                    Salary Remaining: {this.state.salary}
-                </div>
-
+                <div className = "AddPlayers">
+                
                 <Table striped bordered condensed hover>
                     <thead>
                         <tr>
@@ -622,6 +724,21 @@ class DisplayStats extends Component {
                             <th>Position</th>
                             <th>Score projection</th>
                             <th>Salary</th>
+                            <th>Remove</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.state.playersChosen}
+                    </tbody>
+                </Table>
+
+                <Table striped bordered condensed hover>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Position</th>
+                            <th>Score projection</th>
+                            <th>Salary</th>
                             <th>Add</th>
                         </tr>
                     </thead>
@@ -630,6 +747,7 @@ class DisplayStats extends Component {
                     </tbody>
                 </Table>
 
+                </div>
             </div>
         );
     }

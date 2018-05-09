@@ -5,8 +5,8 @@ class StatSkater extends Component {
 
     handleButtonClick(id) {
         this.props.salaryCallback("remove", this.props.salary);
-        this.props.removePlayersCallback(id,this.props.pos);
-        
+        this.props.removePlayersCallback(id,this.props.pos,true);
+        this.props.removePicturesCallback(id, this.props.pos);
     }
 
     render() {
