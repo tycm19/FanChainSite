@@ -16,13 +16,6 @@ const customStyles = {
     }
 };
 
-const tooltip = (
-    <Tooltip id="tooltip">
-        <strong>Holy guacamole!</strong> Check this info.
-    </Tooltip>
-)
-
-
 class AvailablePlayers extends Component {
 
     constructor() {
@@ -50,28 +43,37 @@ class AvailablePlayers extends Component {
     //}
 
     handleButtonClick(id) {
-        if (this.props.availableSalary > this.props.salary) {        
-            var playerAdded = false;
-            if (this.props.availablePositions.indexOf(this.props.pos) !== -1) {
-                this.props.playersChosen.forEach(function (row) {
-                    if (row.key === id) {
-                        playerAdded = true;
-                    }
-                })
-                if (playerAdded !== true) {
+
+        var playerAdded = false;
+        this.props.playersChosen.forEach(function (row) {
+            if (row.key === id) {
+                playerAdded = true;
+            }
+        })
+        if (playerAdded !== true) {
+            if (this.props.availableSalary > this.props.salary) {
+                if (this.props.availablePositions.indexOf(this.props.pos) !== -1) {
                     this.props.salaryCallback("add", this.props.salary);
-                    this.props.updatePlayersCallback(this.props.pos, id, this.props.name, this.props.salary, this.props.profile, this.props.scoreproj );
-                    this.setState({ tooltip: "Success!" })
+                    this.props.updatePlayersCallback(this.props.pos, id, this.props.name, this.props.salary, this.props.profile, this.props.scoreproj);
                 } else {
-                    this.setState({ tooltip: "Player already added" })
+                    var that = this;
+                    this.setState({ pos: "flashRed" });
+                    setTimeout(function () {
+                        that.setState({ pos: "position" + that.props.pos })
+                    }, 750)
                 }
             } else {
-                this.setState({ tooltip: "Position: " + this.props.pos+ " not available" })
-            }                   
+                this.props.salaryFlashCallback();
+            }
         } else {
-            //TODO: popup windows/notifs- less intrusive if possible
-            this.setState({ tooltip: "Not enough salary: " + this.props.availableSalary })
+            var that = this;
+            this.setState({ name: "flashRed" });
+            setTimeout(function () {
+                that.setState({ name: that.props.name })
+            }, 750)
         }
+
+        
 
         //this.openModal()
         //<Modal
@@ -88,19 +90,21 @@ class AvailablePlayers extends Component {
                         //</Modal >
     }
 
+    componentWillMount() {
+        this.state.pos = this.props.pos
+        this.state.name = this.props.name
+    }
+
     render() {
-       
         return (
             <tr className="tbackground">
-                <td className="name">{this.props.name} </td>
-                <td className="position">{this.props.pos} </td>
+                <td className={this.state.name}>{this.props.name} </td>
+                <td className={this.state.pos}>{this.props.pos} </td>
                 <td className="scoreProjection">{this.props.scoreproj} </td>
                 <td className="salary">{this.props.salary} </td>
                 <td>                        
                     <div>                        
-                        <OverlayTrigger trigger='click' placement="right" overlay={tooltip}>
-                            <button className="addPlayer" onClick={(e) => this.handleButtonClick(this.props.id)}>Add</button>                        
-                        </OverlayTrigger>
+                    <button className="addPlayer" onClick={(e) => this.handleButtonClick(this.props.id)}>Add</button>                        
                     </div>    
                 </td>
             </tr>

@@ -26,12 +26,11 @@ class DisplayStats extends Component {
         this.state = {
             salary: 9000,
             stats: [],
+            added: false,
 
             allPlayers: [],
 
             availablePositions: ['C', 'C', 'D', 'D', 'L', 'L', 'R', 'R', 'G', 'G'],
-            skatersChosen: [],
-            goaliesChosen: [],
             playersChosen: [],
 
             centers: [],
@@ -39,7 +38,6 @@ class DisplayStats extends Component {
             rightwings: [],
             leftwings: [],
             goalies: [],
-            newplayers: [],
             players: players,
             //Schema:
             // { 
@@ -52,11 +50,12 @@ class DisplayStats extends Component {
             //   ID : [name, position, score projection, salary]
             // }
             playersList: [], // chosen players
-            rinkPlayers: { leftG: [0, placeholder], leftD: [0, placeholder], leftL: [0, placeholder], leftR: [0, placeholder], leftC: [0, placeholder], rightG: [0, placeholder], rightD: [0, placeholder], rightL: [0, placeholder], rightR: [0, placeholder], rightC: [0, placeholder] }
-        }        
+            rinkPlayers: { leftG: [0, placeholder], leftD: [0, placeholder], leftL: [0, placeholder], leftR: [0, placeholder], leftC: [0, placeholder], rightG: [0, placeholder], rightD: [0, placeholder], rightL: [0, placeholder], rightR: [0, placeholder], rightC: [0, placeholder] },
+            salaryControls: "salaryControls"
+        }
     }
 
-    updatePlayers = (position, playerLink, name, salary, profile,scoreprojection) => {      
+    updatePlayers = (position, playerLink, name, salary, profile, scoreprojection) => {
         this.state.playersChosen.push(
             <SelectedPlayers
                 key={playerLink}
@@ -65,7 +64,7 @@ class DisplayStats extends Component {
                 pos={position}
                 id={playerLink}
                 scoreproj={scoreprojection}
-                salaryCallback={this.updateSalary}                
+                salaryCallback={this.updateSalary}
                 removePlayersCallback={this.removePlayers}
                 removePicturesCallback={this.removePicture}
             />);
@@ -126,12 +125,10 @@ class DisplayStats extends Component {
             }
         }
 
-        
+
     }
 
     removePlayers = (id, position, addPosition) => {
-        
-        var newArray = [];
 
         if (addPosition === true) {
             var newPosAvailableArray = this.state.availablePositions;
@@ -140,16 +137,17 @@ class DisplayStats extends Component {
             this.setState({ availablePositions: newPosAvailableArray })
         }
 
-        var newPlayers = [];
-
+        var newPlayersChosen = [];
         this.state.playersChosen.forEach(function (row) {
             if (row.key !== id) {
-                
-                newPlayers.push(row)
+
+                newPlayersChosen.push(row)
             }
 
         })
-        this.setState({ playersChosen: newPlayers })
+        this.setState({ playersChosen: newPlayersChosen })
+
+
     }
 
     removePicture = (id, position) => {
@@ -204,6 +202,14 @@ class DisplayStats extends Component {
         else {
             this.setState({ salary: this.state.salary + salary });
         }
+    }
+
+    flashSalary = () => {
+        var that = this;
+        this.setState({salaryControls: "salaryFlash"})        
+        setTimeout(function () {
+            that.setState({ salaryControls: "salaryControls" })
+        },750)
     }
 
     componentWillMount() {
@@ -293,10 +299,11 @@ class DisplayStats extends Component {
 
     componentWillUnmount() {
         this.mounted = false;
+        this.added = false;
     }
 
     processPlayers(playersList, allPlayers) {
-        playersList.forEach(function (player) { 
+        playersList.forEach(function (player) {             
             allPlayers.push(
                 <AvailablePlayers
                     key={player.link}
@@ -310,12 +317,12 @@ class DisplayStats extends Component {
                     updatePlayersCallback={this.updatePlayers}
                     availableSalary={this.state.salary}
                     availablePositions={this.state.availablePositions}
-                    skatersChosen={this.state.skatersChosen}
-                    goaliesChosen={this.state.goaliesChosen}
                     playersChosen={this.state.playersChosen}
+                    salaryFlashCallback={this.flashSalary}
                 />
             )
         }.bind(this))
+        this.state.added = false;
     }
 
     render() {
@@ -325,7 +332,10 @@ class DisplayStats extends Component {
         this.processPlayers(this.state.leftwings, allPlayers);
         this.processPlayers(this.state.defensemen, allPlayers);
         this.processPlayers(this.state.goalies, allPlayers);
-        this.processPlayers(this.state.newplayers, allPlayers);
+        if (this.state.added === false) {
+            this.state.added = true;
+            this.state.allPlayers = allPlayers;
+        }
 
         return (
             <div className="DisplayStats">
@@ -348,13 +358,13 @@ class DisplayStats extends Component {
 
                 <div className = "headerControls">
                         <h3> Player Selection </h3>
-                        <div className="salaryControls">
+                        <div className={this.state.salaryControls}>
                             Salary Remaining: {this.state.salary}
                         </div>
                 </div> 
                 
                 <div className = "tables">                                                
-                    
+                        <h3 className = "tableHeaders"> Your Team </h3>
                         <Table striped bordered condensed hover className="tbackground">
                             <thead className="thead">
                         <tr>
@@ -370,6 +380,7 @@ class DisplayStats extends Component {
                     </tbody>
                 </Table>
 
+                <h3 className = "tableHeaders"> Available Players </h3>
                 <Table striped bordered condensed hover>
                             <thead className="thead">
                         <tr>
@@ -381,7 +392,7 @@ class DisplayStats extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {allPlayers}
+                        {this.state.allPlayers}
                     </tbody>
                         </Table>
                 </div>
