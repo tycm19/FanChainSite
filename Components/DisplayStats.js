@@ -212,6 +212,10 @@ class DisplayStats extends Component {
         },750)
     }
 
+    handleCreateContract() {
+        console.log("create")
+    }
+
     componentWillMount() {
         this.mounted = true;
 
@@ -340,7 +344,7 @@ class DisplayStats extends Component {
         return (
             <div className="DisplayStats">
 
-                <div className="imagesDisplay">                    
+                <div className="imagesDisplay">                   
                     <img className="rinkImage" src={rink} alt={placeholder}/>
                     <img className="leftG" src={this.state.rinkPlayers.leftG[1]} alt={placeholder} />
                     <img className="leftD" src={this.state.rinkPlayers.leftD[1]} alt={placeholder}/>
@@ -360,7 +364,8 @@ class DisplayStats extends Component {
                         <h3> Player Selection </h3>
                         <div className={this.state.salaryControls}>
                             Salary Remaining: {this.state.salary}
-                        </div>
+                        </div>         
+                        <button className="submitContract" onClick={(e) => this.handleCreateContract()}> Create Contract </button> 
                 </div> 
                 
                 <div className = "tables">                                                

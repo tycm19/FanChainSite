@@ -9,16 +9,32 @@ import Header from './Components/Header';
 //import DisplayStats from './Components/DisplayStats';
 import Main from './Components/Main'
 import './index.css';
+import { firebase } from './firebase';
 
 //npm install react, jquery, bootstrap-react, react-router
 
 class App extends Component {    
-   
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            authUser: null
+        };
+    }
+
+    componentDidMount() {
+        firebase.auth.onAuthStateChanged(authUser => {
+            authUser
+                ? this.setState(() => ({ authUser }))
+                : this.setState(() => ({ authUser: null }));
+        });
+    }
+
     render() {
         return (
             <div className="App">
                 <div className = "bgimg"></div>
-                <Header/>
+                <Header authUser={this.state.authUser}/>
                 <Main/>             
             </div>
         );

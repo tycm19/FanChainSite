@@ -4,8 +4,8 @@
     "\\Components",
     "\\Components\\data",
     "\\Components\\images",
-    "\\images"
+    "\\firebase"
   ],
-  "SelectedNode": "\\Components\\DisplayStats.js",
+  "SelectedNode": "\\Components\\Signout.js",
   "PreviewInSolutionExplorer": false
 }

@@ -143,14 +143,7 @@ class Competition extends Component {
 
     render() {
         return (
-            <div className="Competition">
-                <form onSubmit={this.handleSubmit.bind(this)}> 
-                    <div>
-                        Username: <input type="text" ref="username" />
-                        Password:  <input type="password" ref="pass" />
-                        <input type="submit" value="Retrieve" />
-                    </div>
-                </form> 
+            <div className="Competition">               
 
                 <Table striped bordered condensed hover>
                     <thead className="tbackground">
