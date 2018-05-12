@@ -29,7 +29,7 @@ const Header = ({ authUser }) =>
                 <li className="home"><Link to='/'>Home</Link></li>
                 <li className="play"><Link to='/play'>Play</Link></li>
                 <li className="competition"><Link to='/competition'>Competition</Link></li>
-                <div className = "login"> <button className = "signout"><Link to='/loginpage'>Log In</Link> </button></div>
+                <div className = "login"> <button className = "signout" type ="button"><Link to='/loginpage' className = "logintext">Log In</Link> </button></div>
             </ul>
         </nav>
     </header>

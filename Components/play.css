@@ -68,10 +68,12 @@
     -moz-border-radius: 9px;
     -webkit-border-radius: 9px;
     border-radius: 9px;
-    border: 1px ridge #dcdcdc;
+    border: 1.5px ridge #dcdcdc;
+    border-top-width: 1px;
+    border-left-width: 1px;
     display: inline-block;
     cursor: pointer;
-    color: #666666;
+    color: black;
     font-family: Arial;
     position: absolute;
     font-size: 13px;
@@ -482,4 +484,8 @@
     border-radius: 10px;
     background: aliceblue;
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+
+.formItem {
+    padding-bottom:5px;
 }

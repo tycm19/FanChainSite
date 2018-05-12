@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { auth } from '../firebase';
 
-const SignupPage = () =>
+const SignupPage = ({ history }) =>
     <div>
-        <h1>SignUp</h1>
-        <SignUpForm />
+        <h3>SignUp</h3>
+        <SignUpForm history={history} />
     </div>
 
 const byPropKey = (propertyName, value) => () => ({
@@ -30,6 +30,10 @@ class SignUpForm extends Component {
             passwordOne,
         } = this.state;
 
+        const {
+            history
+        } = this.props;
+
         auth.doCreateUserWithEmailAndPassword(email, passwordOne)
             .then(authUser => {
                 this.setState(() => ({
@@ -38,6 +42,7 @@ class SignUpForm extends Component {
                     passwordOne: '',
                     passwordTwo: '',
                     error: null, }));
+                history.push('./loginpage')
             })
             .catch(error => {
                 this.setState(byPropKey('error', error));
@@ -57,34 +62,44 @@ class SignUpForm extends Component {
 
         return (
             <form onSubmit={this.onSubmit}>
+
+                <div className="formItem">
                 <input
                     value={username}
                     onChange={event => this.setState(byPropKey('username', event.target.value))}
                     type="text"
                     placeholder="Full Name"
                 />
+                </div>
+                <div className="formItem">
                 <input
                     value={email}
                     onChange={event => this.setState(byPropKey('email', event.target.value))}
                     type="text"
                     placeholder="Email Address"
                 />
+                </div>
+                <div className="formItem">
                 <input
                     value={passwordOne}
                     onChange={event => this.setState(byPropKey('passwordOne', event.target.value))}
                     type="password"
                     placeholder="Password"
                 />
+                </div>
+                <div className="formItem">
                 <input
                     value={passwordTwo}
                     onChange={event => this.setState(byPropKey('passwordTwo', event.target.value))}
                     type="password"
                     placeholder="Confirm Password"
                 />
+                </div>
+                <div className="formItem">
                 <button type="submit">
                     Sign Up
                 </button>
-
+                </div>
                 {error && <p>{error.message}</p>}
 
             </form>
@@ -99,7 +114,7 @@ const SignUpLink = () =>
         <Link to={'/signup'}>Sign Up</Link>
     </p>
 
-export default SignupPage;
+export default withRouter(SignupPage);
 
 export {
     SignUpForm,

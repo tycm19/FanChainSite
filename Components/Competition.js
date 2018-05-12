@@ -6,6 +6,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 class Competition extends Component {
 
+    //TODO: componentWillMount makes query and gets skaters/goalies.
+    //TODO: then it makes queries to playerURL to get stats to display    
     constructor() {
         super();
         this.state = {
@@ -13,7 +15,7 @@ class Competition extends Component {
             goaliesChosen: []
         }
     }
-
+    
     handleSubmit(e) {
         e.preventDefault();
 

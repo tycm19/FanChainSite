@@ -57,21 +57,27 @@ class LoginForm extends Component {
 
         return (
             <form onSubmit={this.onSubmit}>
+                <div className = "formItem">
                 <input
                     value={email}
                     onChange={event => this.setState(byPropKey('email', event.target.value))}
                     type="text"
                     placeholder="Email Address"
-                />
+                    />
+                </div>
+                <div className="formItem">
                 <input
                     value={password}
                     onChange={event => this.setState(byPropKey('password', event.target.value))}
                     type="password"
                     placeholder="Password"
-                />
+                    />
+                </div>
+                <div className="formItem">
                 <button disabled={isInvalid} type="submit">
                     Sign In
-        </button>            
+                </button>   
+                </div>
                 {error && <p>{error.message}</p>}
             </form>
         );

@@ -214,6 +214,8 @@ class DisplayStats extends Component {
 
     handleCreateContract() {
         console.log("create")
+        //TODO: use abi to create smart contract. Listener to alert success
+        //TODO: also send team to back-end via post for storage and competition withdrwa
     }
 
     componentWillMount() {
