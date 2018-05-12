@@ -16,13 +16,14 @@ const byPropKey = (propertyName, value) => () => ({
     [propertyName]: value,
 });
 
+
 class LoginForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
             email: '',
             password: '',
-            error: null,
+            error: null
         };
     }
 
@@ -31,11 +32,11 @@ class LoginForm extends Component {
         const { history } = this.props;
 
         auth.doSignInWithEmailAndPassword(email, password)
-            .then(() => {                
+            .then((user) => { 
                 this.setState(() => ({
                     email: '',
                     password: '',
-                    error: null,
+                    error: null             
                 }));
                 history.push('./play')
             })

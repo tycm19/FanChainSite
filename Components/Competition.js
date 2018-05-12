@@ -3,19 +3,41 @@ import StatSkater from './StatSkater';
 import StatGoalie from './StatGoalie';
 import { Table } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
+import { auth } from '../firebase';
 
 class Competition extends Component {
-
-    //TODO: componentWillMount makes query and gets skaters/goalies.
-    //TODO: then it makes queries to playerURL to get stats to display    
+    
     constructor() {
         super();
+        this.mounted = true;
         this.state = {
             skatersChosen: [],
-            goaliesChosen: []
+            goaliesChosen: [],
+            uid: undefined
         }
     }
+
     
+    componentWillMount() {
+        this.mounted = true;
+        if (auth.getUser() !== null) {
+            auth.getUser().getIdToken().then(
+                idToken => {
+                    if (this.mounted === true) {
+                        console.log(idToken)
+                        this.setState({ uid: idToken })
+                    }
+                    //TODO: componentWillMount makes query and gets skaters/goalies.
+                    //TODO: then it makes queries to playerURL to get stats to display    
+                }
+            )
+        }
+    }
+
+    componentWillUnmount() {
+        this.mounted = false;
+    }
+
     handleSubmit(e) {
         e.preventDefault();
 

@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import StatSkater from './StatSkater';
-import StatGoalie from './StatGoalie';
 import { Table } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import $ from 'jquery';
@@ -11,6 +9,7 @@ import rink from './images/rinkImage.png';
 import './play.css';
 import placeholder from './images/placeholder.png';
 import SelectedPlayers from './SelectedPlayers';
+import { auth } from '../firebase';
 
 //1: Get all players by team id https://statsapi.web.nhl.com/api/v1/teams/15/roster (store their links)
 //2.1: Grab their gameLog https://statsapi.web.nhl.com/{playerlink}/stats?stats=gameLog&season=20172018 and check if they play that day (2018-04-07). if they do play, store info in array
@@ -220,6 +219,17 @@ class DisplayStats extends Component {
 
     componentWillMount() {
         this.mounted = true;
+
+        if (auth.getUser() !== null) {
+            auth.getUser().getIdToken().then(
+                idToken => {
+                    if (this.mounted === true) {
+                        console.log(idToken)
+                        this.setState({ uid: idToken })
+                    }
+                }
+            )
+        }
 
         if (this.mounted === true) {
             var salariesArray;

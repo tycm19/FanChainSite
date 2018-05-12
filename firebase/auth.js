@@ -8,3 +8,7 @@ export const doSignInWithEmailAndPassword = (email, password) =>
 
 export const doSignOut = () =>
     auth.signOut();
+
+export const getUser = () =>
+    auth.currentUser;
+
