@@ -27,8 +27,21 @@ class Competition extends Component {
                         console.log(idToken)
                         this.setState({ uid: idToken })
                     }
-                    //TODO: componentWillMount makes query and gets skaters/goalies.
-                    //TODO: then it makes queries to playerURL to get stats to display    
+                    //if (this.mounted === true) {
+                                //var salariesPost = this.state.salaries;
+                                    //var url = '/set_players';
+                                    //var data = [{ id: 7, firstname: "A", lastname: "B", position: 'C', projectedScore: 'D', salary: 1, image: "text" }];
+                                    //var datas = JSON.stringify(data)
+                                    //fetch(url, {
+                                        //headers: { 'content-type': "application/json" },
+                                        //method: 'POST', // or 'PUT'
+                                        //body: datas, // data can be `string` or {object}!                
+                                    //}).then(res => res.json())
+                                        //.catch(error => console.error('Error:', error))
+                                        //.then(response => console.log('Success:', response));
+                                //}
+
+                    //TODO: POST idtoken and date. Rreceive JSON of ids used in call for displayStats();
                 }
             )
         }
@@ -40,100 +53,34 @@ class Competition extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
+        //Loop through all the player links/IDs
+        //first ajax call to get name, code (position), 
 
         //var playerURL = 'https://statsapi.web.nhl.com' + playerLink + '/stats?stats=gameLog';
-
-        //if (position === 'G') {
-            //console.log(stats)
-        //    this.state.goaliesChosen.push(
-        //        <StatGoalie
-        //            key={playerLink}
-        //            name={name}
-        //            sav={0}
-        //            ga={0}
-        //            so={0}
-        //            salary={salary}
-        //            id={playerLink}
-        //            pos={position}
-        //            salaryCallback={this.updateSalary}
-        //            removePlayersCallback={this.removePlayers}
-        //            removePicturesCallback={this.removePicture}
-        //        />);
-        //    var goalies = this.state.goaliesChosen;
-        //    this.setState({ goaliesChosen: goalies })
-
-        //}
-        //else {
-            //this.state.skatersChosen.push(
-                //<StatSkater
-                    //key={playerLink}
-                    //name={name}
-                    //assist={0}
-                    //evg={0}
-                    //ppg={0}
-                    //shg={0}
-                    //sog={0}
-                    //hits={0}
-                    //blk={0}
-                    ////salary={salary}
-                    //id={playerLink}
-                    //pos={position}
-                    //salaryCallback={this.updateSalary}
-                    //removePlayersCallback={this.removePlayers}
-                    //removePicturesCallback={this.removePicture}
-                ///>);
-            //var skaters = this.state.skatersChosen;
-            //this.setState({ skatersChosen: skaters })
-        //}
-
+       
         //$.ajax({
             //url: playerURL,
             //dataType: 'json',
             //cache: false,
             //success: function (stats) {
-                //var playerRemoved = true;
+                    //var statLine = stats['stats'][0]['splits'][0]['stat'];      
                     //if (position === 'G') {
-                        //this.state.goaliesChosen.forEach(function (row) {
-                            //if (row.key === playerLink) {
-                                //playerRemoved = false;
-                            //}
-                        //})
-                    //}
-                    //else {
-                        //this.state.skatersChosen.forEach(function (row) {
-                            //if (row.key === playerLink) {
-                                //playerRemoved = false;
-                            //}
-                        //})
-                    //}
-
-                //if (playerRemoved === false) {
-                    //this.removePlayers(playerLink, position,false)
-                    //var statLine = stats['stats'][0]['splits'][0]['stat'];
-                    //console.log(position) check positions valid                  
-                    //if (position === 'G') {
-                        //console.log(stats)
                         //this.state.goaliesChosen.push(
                             //<StatGoalie
                                 //key={playerLink}
                                 //name={name}
                                 //sav={statLine['saves']}
                                 //ga={statLine['goalsAgainst']}
-                                //so={statLine['shutouts']}
-                                //salary={salary}
+                                //so={statLine['shutouts']} 
                                 //id={playerLink}
                                 //pos={position}
-                                //salaryCallback={this.updateSalary}
-                                //removePlayersCallback={this.removePlayers}
-                                //removePicturesCallback={this.removePicture}
                             ///>);
                         //var goalies = this.state.goaliesChosen;
                         //this.setState({ goaliesChosen: goalies })
 
                     //}
                     //else {
-                        // console.log('added');
-//                        var goals = statLine['goals'];
+                        //var goals = statLine['goals'];
                         //var ppgs = statLine['powerPlayGoals'];
                         //var shgs = statLine['shortHandedGoals'];
                         //this.state.skatersChosen.push(
@@ -146,13 +93,9 @@ class Competition extends Component {
                                 //shg={shgs}
                                 //sog={parseInt(statLine['shots'], 10)}
                                 //hits={parseInt(statLine['hits'], 10)}
-                                //blk={parseInt(statLine['blocked'], 10)}
-                                //salary={salary}
+                                //blk={parseInt(statLine['blocked'], 10)} 
                                 //id={playerLink}
                                 //pos={position}
-                                //salaryCallback={this.updateSalary}
-                                //removePlayersCallback={this.removePlayers}
-                                //removePicturesCallback={this.removePicture}
                             ///>);
                         //var skaters = this.state.skatersChosen;
                         //this.setState({ skatersChosen: skaters })

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './play.css';
 import 'bootstrap/dist/css/bootstrap.css';
+import placeholder from './images/placeholder.png';
 
 
 class AvailablePlayers extends Component {
@@ -55,10 +56,11 @@ class AvailablePlayers extends Component {
         return (
             <tr className="tbackground">
                 <td className={this.state.name}>{this.props.name} </td>
+                <td className="tableProfile"> <img className = "tablepic" src={this.props.profile.src} alt={placeholder} /> </td>
                 <td className={this.state.pos}>{this.props.pos} </td>
                 <td className="scoreProjection">{this.props.scoreproj} </td>
                 <td className="salary">{this.props.salary} </td>
-                <td>                        
+                <td className="buttoncolumn">                        
                     <div>                        
                     <button className="addPlayer" onClick={(e) => this.handleButtonClick(this.props.id)}>Add</button>                        
                     </div>    

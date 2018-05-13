@@ -489,3 +489,33 @@
 .formItem {
     padding-bottom:5px;
 }
+
+.tableProfile {
+    width: 80px;
+}
+
+.tablepic {
+    width: 80px;
+    height: 80px;
+    opacity: 0.95;
+    margin-top: -12px;
+    margin-bottom: -12px;
+    margin-right: -12px;
+    margin-left: -12px;
+}
+
+.position {
+    width: 120px;
+}
+
+.salary {
+    width: 130px;
+}
+
+.scoreProjection {
+    width: 150px;
+}
+
+.buttoncolumn {
+    width: 100px;
+}

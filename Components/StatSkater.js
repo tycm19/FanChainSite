@@ -25,7 +25,6 @@ class StatSkater extends Component {
                 <td className="BLK">{this.props.blk} </td>
                 <td className="Salary">{this.props.salary} </td>
                 <td className="FantasyPoints">{points} </td>
-                <td > <button className="remove" onClick={(e) => this.handleButtonClick(this.props.id)}>Remove </button></td>
             </tr>
         );
     }

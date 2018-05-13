@@ -59,6 +59,7 @@ class DisplayStats extends Component {
             <SelectedPlayers
                 key={playerLink}
                 name={name}
+                profile={profile}
                 salary={salary}
                 pos={position}
                 id={playerLink}
@@ -213,9 +214,30 @@ class DisplayStats extends Component {
 
     handleCreateContract() {
         console.log("create")
+        console.log(this.state)
         //TODO: use abi to create smart contract. Listener to alert success
-        //TODO: also send team to back-end via post for storage and competition withdrwa
+        //TODO: also send team to back-end via post for storage and competition withdraw
+
+        
     }
+
+    //const Eth = require('ethjs-query')
+        //const EthContract = require('ethjs-contract')
+
+        //function startApp(web3) {
+        //    const eth = new Eth(web3.currentProvider)
+        //    const contract = new EthContract(eth)
+        //    initContract(contract)
+        //}
+
+    //const abi = [{}]
+    //const address = ""
+
+    //initContract(contract) {
+    //    const MiniToken = contract(abi)
+    //    const miniToken = MiniToken.at(address)
+    //    listenForClicks(miniToken)
+    //}
 
     componentWillMount() {
         this.mounted = true;
@@ -386,6 +408,7 @@ class DisplayStats extends Component {
                             <thead className="thead">
                         <tr>
                             <th>Name</th>
+                            <th>Profile</th>
                             <th>Position</th>
                             <th>Score projection</th>
                             <th>Salary</th>
@@ -402,6 +425,7 @@ class DisplayStats extends Component {
                             <thead className="thead">
                         <tr>
                             <th>Name</th>
+                            <th>Profile</th>
                             <th>Position</th>
                             <th>Score projection</th>
                             <th>Salary</th>
