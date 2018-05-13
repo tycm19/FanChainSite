@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { auth } from '../firebase';
+import signup from './images/signup.png';
 
 const SignupPage = ({ history }) =>
-    <div>
-        <h3>SignUp</h3>
+    <div className = "loginMain">
+        <h3 className = "loginHeader">Sign Up</h3>
+        <img className="signupImg" src={signup} alt={signup} />
         <SignUpForm history={history} />
     </div>
 
@@ -65,38 +67,42 @@ class SignUpForm extends Component {
 
                 <div className="formItem">
                 <input
+                    className = "textInput"
                     value={username}
                     onChange={event => this.setState(byPropKey('username', event.target.value))}
                     type="text"
-                    placeholder="Full Name"
+                    placeholder=" Full Name"
                 />
                 </div>
                 <div className="formItem">
                 <input
+                    className = "textInput"
                     value={email}
                     onChange={event => this.setState(byPropKey('email', event.target.value))}
                     type="text"
-                    placeholder="Email Address"
+                    placeholder=" Email Address"
                 />
                 </div>
                 <div className="formItem">
                 <input
+                    className = "textInput"
                     value={passwordOne}
                     onChange={event => this.setState(byPropKey('passwordOne', event.target.value))}
                     type="password"
-                    placeholder="Password"
+                    placeholder=" Password"
                 />
                 </div>
                 <div className="formItem">
                 <input
+                    className = "textInput"
                     value={passwordTwo}
                     onChange={event => this.setState(byPropKey('passwordTwo', event.target.value))}
                     type="password"
-                    placeholder="Confirm Password"
+                    placeholder=" Confirm Password"
                 />
                 </div>
                 <div className="formItem">
-                <button type="submit">
+                <button className ="formButton" type="submit">
                     Sign Up
                 </button>
                 </div>
@@ -109,7 +115,7 @@ class SignUpForm extends Component {
 
 const SignUpLink = () =>
     <p>
-        Don't have an account?
+        Need an account?
     {' '}
         <Link to={'/signup'}>Sign Up</Link>
     </p>

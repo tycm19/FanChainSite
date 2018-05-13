@@ -65,12 +65,12 @@
     background: linear-gradient(to bottom, #f9f9f9 5%, #e9e9e9 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f9f9f9', endColorstr='#e9e9e9',GradientType=0);
     background-color: #f9f9f9;
-    -moz-border-radius: 9px;
-    -webkit-border-radius: 9px;
-    border-radius: 9px;
-    border: 1.5px ridge #dcdcdc;
-    border-top-width: 1px;
-    border-left-width: 1px;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    border: 1.2px ridge #dcdcdc;
+    border-top-width: .5px;
+    border-left-width: .5px;
     display: inline-block;
     cursor: pointer;
     color: black;
@@ -490,6 +490,26 @@
     padding-bottom:5px;
 }
 
+.textInput {
+    border: solid;
+    border-radius: 3px;
+    border-width: 1px;
+    border-color: rgba(0,0,0,0.4);
+}
+
+.formButton {
+    border: solid;
+    border-radius: 3px;
+    border-width: 1px;
+    border-color: rgba(0,0,0,0.5);
+    font-weight: bold;
+    font-size: 14px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    margin-top: 5px;
+    width: 176px;
+}
+
 .tableProfile {
     width: 80px;
 }
@@ -518,4 +538,38 @@
 
 .buttoncolumn {
     width: 100px;
+}
+
+.loginImg {
+    height: 80px;
+    width: 80px;
+    border-radius: 20px;
+    opacity: 0.9;
+    margin-bottom: 10px;
+    margin-left: 50px;
+}
+
+.loginMain {
+    width: 300px;
+    margin: auto;
+}
+
+.loginHeader {
+    margin-left: 32px;
+}
+
+.signupImg {
+    height: 80px;
+    width: 80px;
+    border-radius: 40px;
+    opacity: 0.9;
+    margin-bottom: 10px;
+    margin-left: 45px;
+}
+
+.logoImg {
+    width: 25px;
+    height: 25px;
+    margin-bottom: 5px;
+    opacity: 0.95;
 }
